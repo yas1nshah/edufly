@@ -1,5 +1,5 @@
 {
-  "name": "ai-lms",
+  "name": "edufly",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,25 +9,42 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.817.0",
+    "@aws-sdk/s3-request-presigner": "^3.817.0",
+    "@daveyplate/better-auth-ui": "^1.7.3",
     "@google/generative-ai": "^0.24.1",
     "@prisma/client": "^6.8.2",
+    "@radix-ui/react-progress": "^1.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@tanstack/react-query": "^5.77.0",
     "axios": "^1.9.0",
     "better-auth": "^1.2.8",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "idb": "^8.0.3",
+    "lucide-react": "^0.511.0",
     "next": "15.3.2",
     "pdfjs-dist": "^5.2.133",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-dropzone": "^14.3.8",
+    "tailwind-merge": "^3.3.0",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@tanstack/eslint-plugin-query": "^5.74.7",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
     "tailwindcss": "^4",
+    "tw-animate-css": "^1.3.0",
     "typescript": "^5"
+  },
+  "prisma": {
+    "schema": "./prisma"
   }
 }

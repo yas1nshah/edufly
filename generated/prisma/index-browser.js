@@ -166,9 +166,51 @@ exports.Prisma.VerificationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PlanScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  storageLimitMB: 'storageLimitMB',
+  aiTokensPerMonth: 'aiTokensPerMonth',
+  priceCents: 'priceCents',
+  currency: 'currency',
+  createdAt: 'createdAt',
+  features: 'features'
+};
+
+exports.Prisma.SubscriptionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  planId: 'planId',
+  startedAt: 'startedAt',
+  expiresAt: 'expiresAt',
+  renewed: 'renewed'
+};
+
+exports.Prisma.FileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  size: 'size',
+  key: 'key',
+  type: 'type',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.UsageScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  value: 'value',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.NullsOrder = {
@@ -209,12 +251,53 @@ exports.Prisma.VerificationOrderByRelevanceFieldEnum = {
   value: 'value'
 };
 
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
+exports.Prisma.PlanOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  currency: 'currency'
+};
+
+exports.Prisma.SubscriptionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  planId: 'planId'
+};
+
+exports.Prisma.FileOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  key: 'key',
+  type: 'type'
+};
+
+exports.Prisma.UsageOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  Plan: 'Plan',
+  Subscription: 'Subscription',
+  File: 'File',
+  Usage: 'Usage'
 };
 
 /**

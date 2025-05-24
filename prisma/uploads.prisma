@@ -1,0 +1,49 @@
+model Plan {
+  id              String   @id @default(uuid())
+  name            String   // e.g. Free, Boost, Pro, Ultra
+  storageLimitMB  Int      // 100MB, 2048MB etc
+  aiTokensPerMonth Int     // e.g. 500, 2000, 10000
+  priceCents      Int      // in cents
+  currency        String   // "usd", "pkr"
+  createdAt       DateTime @default(now())
+  features        Json     // for future flexibility
+
+  subscriptions   Subscription[]
+}
+
+model Subscription {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id])
+  planId      String
+  plan        Plan     @relation(fields: [planId], references: [id])
+  startedAt   DateTime @default(now())
+  expiresAt   DateTime
+  renewed     Boolean  @default(false)
+
+  @@index([expiresAt])
+}
+
+model File {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  name      String
+  size      Int
+  key       String
+  type      String
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Usage {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  type        String   // e.g., "storage", "ai_tokens"
+  value       Int      // value used (e.g. 345MB, 200 tokens)
+  createdAt   DateTime @default(now())
+
+  @@index([userId, type])
+}
