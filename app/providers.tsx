@@ -9,6 +9,9 @@ import { authClient } from "@/lib/auth-client"
 import { getQueryClient } from "@/lib/get-query-client"
 import { QueryClientProvider } from "@tanstack/react-query"
 import { AuthUIProviderTanstack } from "@daveyplate/better-auth-ui/tanstack"
+import { ThemeProvider as NextThemesProvider, ThemeProvider } from 'next-themes'
+
+
  
 export function Providers({ children }: { children: ReactNode }) {
     const router = useRouter()
@@ -16,6 +19,12 @@ export function Providers({ children }: { children: ReactNode }) {
  
     return (
         <QueryClientProvider client={queryClient}>
+            <ThemeProvider 
+                attribute="class"
+                defaultTheme="system"
+                enableSystem={true}
+            >
+
 
             <AuthUIProviderTanstack
                 authClient={authClient}
@@ -32,6 +41,7 @@ export function Providers({ children }: { children: ReactNode }) {
                 >
                 {children}
             </AuthUIProviderTanstack>
+            </ThemeProvider>
         </QueryClientProvider>
     )
 }

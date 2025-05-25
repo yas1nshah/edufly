@@ -1,4 +1,4 @@
-import { FileUploader } from "@/components/uploader";
+import { FileUploader } from "@/components/uploads/uploader";
 import CourseCreator from "@/courseCreater";
 import Image from "next/image";
 

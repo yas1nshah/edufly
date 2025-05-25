@@ -10174,17 +10174,17 @@ export namespace Prisma {
 
   export type FileWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    key?: string
     AND?: FileWhereInput | FileWhereInput[]
     OR?: FileWhereInput[]
     NOT?: FileWhereInput | FileWhereInput[]
     userId?: StringFilter<"File"> | string
     name?: StringFilter<"File"> | string
     size?: IntFilter<"File"> | number
-    key?: StringFilter<"File"> | string
     type?: StringFilter<"File"> | string
     createdAt?: DateTimeFilter<"File"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+  }, "id" | "key">
 
   export type FileOrderByWithAggregationInput = {
     id?: SortOrder

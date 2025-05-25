@@ -30,7 +30,7 @@ model File {
   user      User     @relation(fields: [userId], references: [id])
   name      String
   size      Int
-  key       String
+  key       String @unique
   type      String
   createdAt DateTime @default(now())
 
