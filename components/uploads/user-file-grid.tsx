@@ -226,7 +226,17 @@ export default function UserFileGrid({ onUpload }: UserFileGridProps) {
       </div>
 
       {/* Storage Usage */}
-      <Card className="p-4">
+      <div className="flex justify-between items-end">
+          <div className="relative flex-1 max-w-sm">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input
+              placeholder="Search files..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10"
+            />
+          </div>        
+      <Card className="p-4 min-w-1/4">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-medium">Storage Usage</h3>
           <span className="text-sm text-muted-foreground">
@@ -240,11 +250,12 @@ export default function UserFileGrid({ onUpload }: UserFileGridProps) {
             storagePercentage > 90 && "bg-red-100",
             storagePercentage > 75 && storagePercentage <= 90 && "bg-yellow-100",
           )}
-        />
+          />
         {storagePercentage > 90 && (
           <p className="text-sm text-red-600 mt-2">Storage almost full. Consider deleting some files.</p>
         )}
       </Card>
+        </div>
 
       {/* Filters and Search */}
       <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
@@ -263,16 +274,6 @@ export default function UserFileGrid({ onUpload }: UserFileGridProps) {
               ))}
             </TabsList>
           </Tabs>
-
-          <div className="relative flex-1 max-w-sm">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <Input
-              placeholder="Search files..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10"
-            />
-          </div>
         </div>
 
         <div className="flex items-center gap-2">
@@ -441,7 +442,7 @@ export default function UserFileGrid({ onUpload }: UserFileGridProps) {
                       transition={{ duration: 0.2 }}
                       className="group"
                     >
-                      <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                      <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 pt-0">
                         <CardContent className="p-0 relative">
                           {isImage(file.type) ? (
                             previews[file.id] ? (
@@ -491,7 +492,7 @@ export default function UserFileGrid({ onUpload }: UserFileGridProps) {
                           </div>
                         </CardContent>
 
-                        <CardFooter className="p-3">
+                        <CardFooter className="py-1 px-3">
                           <div className="w-full space-y-1">
                             <p className="text-sm font-medium truncate" title={file.name}>
                               {file.name}

@@ -67,12 +67,10 @@ export const GET = async (req: Request) => {
   const files = await db.file.findMany({
     where: {
       userId,
-      ...(type ? { type: { contains: type } } : {}),
+      ...(type && type !== "all" ? { type: { contains: type } } : {}),
     },
     orderBy: {
-      ...(sort === "size"
-        ? { size: "desc" }
-        : { createdAt: "desc" }),
+      ...(sort === "size" ? { size: "desc" } : { createdAt: "desc" }),
     },
   });
 

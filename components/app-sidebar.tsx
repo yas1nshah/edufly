@@ -47,18 +47,13 @@ const data = {
       icon: IconDashboard,
     },
     {
-      title: "Lifecycle",
-      url: "#",
-      icon: IconListDetails,
-    },
-    {
       title: "Analytics",
       url: "#",
       icon: IconChartBar,
     },
     {
-      title: "Projects",
-      url: "#",
+      title: "Cources",
+      url: "/dashboard/courses",
       icon: IconFolder,
     },
     {
