@@ -107,7 +107,7 @@ async function getSignedUrl(key: string): Promise<string> {
 }
 
 async function deleteFile(key: string): Promise<void> {
-  const res = await fetch("/api/upload/delete", {
+  const res = await fetch("/api/upload", {
     method: "DELETE",
     body: JSON.stringify({ key }),
     headers: {

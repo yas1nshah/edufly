@@ -4,7 +4,7 @@ import { SiteHeader } from '@/components/site-header'
 import React, { useState } from 'react'
 import MyEditorPage from '@/components/editor/playground'
 import { CompactFileSelection } from '@/components/uploads/file-selection'
-import PdfToCourseCurriculum from '@/components/course/pdf-course'
+import CourseBuilder from '@/components/course/course-builder'
 
 const CreateCourcePage = () => {
     const [selected, setSelected] = useState<string[]>([])
@@ -23,8 +23,7 @@ const CreateCourcePage = () => {
             fileType='application/pdf'
             />
 
-            <PdfToCourseCurriculum selected={selected} />
-
+            <CourseBuilder selected={selected} />
             {JSON.stringify(selected)}
             <MyEditorPage />
           </div>
