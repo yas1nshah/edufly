@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import MyEditorPage from '@/components/editor/playground'
 import { CompactFileSelection } from '@/components/uploads/file-selection'
 import CourseBuilder from '@/components/course/course-builder'
+import AiCourseBuilder from '@/components/course-new/ai-course-builder'
 
 const CreateCourcePage = () => {
     const [selected, setSelected] = useState<string[]>([])
@@ -23,9 +24,13 @@ const CreateCourcePage = () => {
             fileType='application/pdf'
             />
 
-            <CourseBuilder selected={selected} />
+            <AiCourseBuilder selected={selected} />
+
+            
+
+            {/* <CourseBuilder selected={selected} />
             {JSON.stringify(selected)}
-            <MyEditorPage />
+            <MyEditorPage /> */}
           </div>
         </div>
       </div>

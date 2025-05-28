@@ -11,7 +11,7 @@ import { NotionEditor } from "@/components/course-new/notion-editor"
 import CourseChapters from "./course-sections"
 
 // Sample course data with advanced components
-const courseData = {
+const temp = {
   title: "Complete Web Development Bootcamp",
   description: "Learn modern web development from scratch",
   instructor: "John Doe",
@@ -270,7 +270,25 @@ Great progress! You're becoming a web developer!`,
   ],
 }
 
-export function CourseBuilder() {
+type Chapter = {
+  id: number
+  title: string
+  duration: string
+  completed: boolean
+  content: string
+}
+
+type CourseData = {
+  title: string
+  description: string
+  instructor: string
+  students: number
+  chapters: Chapter[]
+}
+
+
+
+export function CourseBuilder({courseData = temp }: { courseData: CourseData }) {
   const [activeChapter, setActiveChapter] = useState(1)
   const [isEditing, setIsEditing] = useState(false)
   const [editContent, setEditContent] = useState("")

@@ -30,12 +30,14 @@ model File {
   user      User     @relation(fields: [userId], references: [id])
   name      String
   size      Int
-  key       String @unique
+  key       String   @unique
   type      String
   createdAt DateTime @default(now())
+  courses   Course[] @relation("CourseFiles")
 
   @@index([userId])
 }
+
 
 model Usage {
   id          String   @id @default(uuid())

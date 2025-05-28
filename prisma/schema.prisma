@@ -26,6 +26,9 @@ model User {
 
   files           File[]
   usage           Usage[]
+  courses         Course[]        @relation("CourseAuthor")
+  sharedCourses   SharedCourse[]  @relation("SharedWithUser")
+
 
   @@unique([email])
   @@map("user")

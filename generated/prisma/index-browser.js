@@ -120,6 +120,23 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.CourseScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  authorId: 'authorId'
+};
+
+exports.Prisma.SharedCourseScalarFieldEnum = {
+  id: 'id',
+  courseId: 'courseId',
+  sharedWith: 'sharedWith',
+  sharedAt: 'sharedAt'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -213,6 +230,30 @@ exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
+exports.Prisma.CourseOrderByRelevanceFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  authorId: 'authorId'
+};
+
+exports.Prisma.SharedCourseOrderByRelevanceFieldEnum = {
+  id: 'id',
+  courseId: 'courseId',
+  sharedWith: 'sharedWith'
+};
+
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
@@ -251,17 +292,6 @@ exports.Prisma.VerificationOrderByRelevanceFieldEnum = {
   value: 'value'
 };
 
-exports.Prisma.JsonNullValueFilter = {
-  DbNull: Prisma.DbNull,
-  JsonNull: Prisma.JsonNull,
-  AnyNull: Prisma.AnyNull
-};
-
-exports.Prisma.QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
-};
-
 exports.Prisma.PlanOrderByRelevanceFieldEnum = {
   id: 'id',
   name: 'name',
@@ -290,6 +320,8 @@ exports.Prisma.UsageOrderByRelevanceFieldEnum = {
 
 
 exports.Prisma.ModelName = {
+  Course: 'Course',
+  SharedCourse: 'SharedCourse',
   User: 'User',
   Session: 'Session',
   Account: 'Account',

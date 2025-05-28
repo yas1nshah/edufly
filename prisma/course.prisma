@@ -1,0 +1,32 @@
+model Course {
+  id            String         @id @default(uuid())
+  title         String
+  description   String
+  content       Json
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  // Author relation
+  authorId      String
+  author        User           @relation("CourseAuthor", fields: [authorId], references: [id])
+
+  // Many-to-many with File
+  files         File[]         @relation("CourseFiles")
+
+  // Many-to-many shared with users
+  sharedWith    SharedCourse[] @relation("SharedCourseRelation")
+
+  @@index([authorId])
+}
+
+
+model SharedCourse {
+  id         String  @id @default(uuid())
+  courseId   String
+  course     Course  @relation("SharedCourseRelation", fields: [courseId], references: [id])
+  sharedWith String
+  user       User    @relation("SharedWithUser", fields: [sharedWith], references: [id])
+  sharedAt   DateTime @default(now())
+
+  @@unique([courseId, sharedWith])
+}
