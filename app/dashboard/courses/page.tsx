@@ -18,6 +18,7 @@ const formatDistanceToNow = (date: Date) => {
 }
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { Skeleton } from '@/components/ui/skeleton'
 
 const CoursesPage = () => {
   const router = useRouter()
@@ -63,9 +64,17 @@ const CoursesPage = () => {
     },
   })
 
-  if (isFetching || isFetchingShared) {
-    return <div className="p-6 text-center text-muted-foreground">Loading courses...</div>
-  }
+  if (isFetching || isFetchingShared) return (
+  <div className='p-4 space-y-4 mt-10'>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+      <Skeleton  className='h-auto aspect-square'/>
+      <Skeleton  className='h-auto aspect-square'/>
+      <Skeleton  className='h-auto aspect-square'/>
+      <Skeleton  className='h-auto aspect-square'/>
+    </div>
+      <Skeleton  className='h-64 w-full'/>
+  </div>
+  )
 
   const renderCourseCard = (course: any) => (
     <div

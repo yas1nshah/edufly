@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button'
 import { GraduationCap, BookOpen, Users, Activity } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
+import { Skeleton } from '@/components/ui/skeleton'
 
 const Dashboard = () => {
   const { data, isFetching } = useQuery({
@@ -21,7 +22,17 @@ const Dashboard = () => {
     }
   })
 
-  if (isFetching) return <div>Loading...</div>
+  if (isFetching) return (
+  <div className='p-4 space-y-4 mt-10'>
+    <div className="flex gap-4">
+      <Skeleton  className='h-48 w-full'/>
+      <Skeleton  className='h-48 w-full'/>
+      <Skeleton  className='h-48 w-full'/>
+      <Skeleton  className='h-48 w-full'/>
+    </div>
+      <Skeleton  className='h-64 w-full'/>
+  </div>
+  )
   if (!data) return <div>Loading...</div>
 
   // Cards data created directly from fetched `data`

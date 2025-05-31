@@ -229,3 +229,86 @@ export const POST = async (
     return new Response("Internal Server Error", { status: 500 })
   }
 }
+
+
+export const DELETE = async (
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) => {
+  const session = await auth.api.getSession(req)
+  const userId = session?.user.id
+
+  if (!userId) {
+    return Response.json(
+      { success: false, message: "Unauthorized" }, 
+      { status: 401 }
+    )
+  }
+
+  const { id } = await params
+  if (!id || typeof id !== "string") {
+    return Response.json(
+      { success: false, message: "Invalid course ID" }, 
+      { status: 400 }
+    )
+  }
+
+  const existing = await db.course.findUnique({
+    where: { id },
+    select: {
+      id: true,
+      authorId: true,
+    },
+  })
+
+  if (!existing) {
+    return Response.json(
+      { success: false, message: "Course not found" }, 
+      { status: 404 }
+    )
+  }
+
+  if (existing.authorId !== userId) {
+    return Response.json(
+      { success: false, message: "Unauthorized to delete this course" }, 
+      { status: 401 }
+    )
+  }
+
+  try {
+    // Delete in proper order to maintain referential integrity
+    await db.sharedCourse.deleteMany({
+      where: {
+        courseId: id,
+      },
+    })
+
+    await db.chapter.deleteMany({
+      where: {
+        courseId: id,
+      },
+    })
+
+    await db.course.delete({
+      where: { id },
+    })
+
+    return Response.json(
+      { 
+        success: true, 
+        message: "Course deleted successfully",
+        courseId: id
+      }, 
+      { status: 200 }
+    )
+  } catch (err) {
+    console.error("Error deleting course:", err)
+    return Response.json(
+      { 
+        success: false, 
+        message: "Internal server error while deleting course" 
+      }, 
+      { status: 500 }
+    )
+  }
+}

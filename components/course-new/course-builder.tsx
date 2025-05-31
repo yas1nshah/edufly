@@ -139,6 +139,45 @@ export function CourseBuilder({ courseData }: { courseData: Prop }) {
     }
   })
 
+  // Delete course mutation
+  const deleteMutation = useMutation({
+    mutationFn: async (courseId: string) => {
+      const res = await fetch(`/api/course/${courseId}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      })
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}))
+        throw new Error(errorData.message || "Failed to delete course")
+      }
+
+      return res.json()
+    },
+    onSuccess: () => {
+      // Navigate to courses dashboard after successful deletion
+      router.push("/dashboard/courses")
+    },
+    onError: (error) => {
+      console.error("Failed to delete course:", error)
+      // You might want to show a toast notification here
+      alert(`Failed to delete course: ${error.message}`)
+    }
+  })
+
+  const handleDeleteCourse = () => {
+    if (!isAuthor || !courseData.id) return
+    
+    // Show confirmation dialog
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete "${courseData.title}"? This action cannot be undone.`
+    )
+    
+    if (confirmDelete) {
+      deleteMutation.mutate(courseData.id)
+    }
+  }
+
   
   // Course metadata editing states - only for authors
   const [isEditingCourse, setIsEditingCourse] = useState(false)
@@ -154,7 +193,7 @@ export function CourseBuilder({ courseData }: { courseData: Prop }) {
 
   // Share functionality
   const handleShare = async () => {
-    const shareUrl = `${window.location.origin}/dashboard/share/${courseData.id}`
+    const shareUrl = `${process.env.BETTER_AUTH_URL}/dashboard/share/${courseData.id}`
     
     try {
       await navigator.clipboard.writeText(shareUrl)
@@ -511,12 +550,35 @@ export function CourseBuilder({ courseData }: { courseData: Prop }) {
         {/* Right Sidebar - Course Navigation */}
         <div className="w-1/3 border-l px-2 py-4">
           <Tabs defaultValue="chapters" className="w-full">
+            <div className="flex justify-between items-center">
+
             <TabsList>
               <TabsTrigger value="chapters">Chapters</TabsTrigger>
               <TabsTrigger value="assets">Assets</TabsTrigger>
               <TabsTrigger value="chat">Smart Assistant</TabsTrigger>
             </TabsList>
+              {isAuthor && (
+                <Button 
+                  variant="destructive" 
+                  size="sm"
+                  onClick={handleDeleteCourse}
+                  disabled={deleteMutation.isPending}
+                >
+                  {deleteMutation.isPending ? (
+                    <>
+                      <Trash2 className="w-4 h-4 mr-2 animate-spin" />
+                      Deleting...
+                    </>
+                  ) : (
+                    <>
+                      <Trash2 className="w-4 h-4 mr-2" />
+                      Delete
+                    </>
+                  )}
+                </Button>
+              )}
             
+            </div>
             <TabsContent value="chapters" className="p-2 border-b">
               <div className="flex items-center justify-between mb-4">
                 <div>
