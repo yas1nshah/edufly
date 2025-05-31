@@ -5,346 +5,224 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Button } from "@/components/ui/button"
-import { Play, CheckCircle, Clock, Users, Edit3, Eye } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { Play, CheckCircle, Clock, Users, Edit3, Eye, Plus, Save, X, Trash2, GripVertical, Share2, Copy } from "lucide-react"
 import { MDXContent } from "@/components/course-new/mdx-content"
 import { NotionEditor } from "@/components/course-new/notion-editor"
 import CourseChapters from "./course-sections"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs"
 import FileCard from "./file-card"
 import SmartAssistant from "./smart-assistant"
-
-// Sample course data with advanced components
-const temp = {
-  title: "Complete Web Development Bootcamp",
-  description: "Learn modern web development from scratch",
-  instructor: "John Doe",
-  students: 1250,
-  chapters: [
-    {
-      id: 1,
-      title: "Introduction to Web Development",
-      duration: "45 min",
-      completed: true,
-      content: `# Welcome to Web Development!
-
-This is your first step into the exciting world of web development. In this chapter, we'll cover the fundamentals.
-
-<AdvancedAnimation type="particleSystem" title="Welcome to Coding Universe" props={"particleCount": 40, "color": "#3b82f6"} />
-
-## What You'll Learn
-
-- HTML basics
-- CSS fundamentals  
-- JavaScript introduction
-
-<Quiz question="What does HTML stand for?" options={["Hyper Text Markup Language", "High Tech Modern Language", "Home Tool Markup Language"]} correct={0} />
-
-Let's start with a simple example:
-
-\`\`\`html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My First Page</title>
-</head>
-<body>
-    <h1>Hello World!</h1>
-</body>
-</html>
-\`\`\`
-
-<YouTubeEmbed videoId="UB1O30fR-EE" title="HTML Basics" />
-
-## Development Process
-
-Here's how web development typically works:
-
-<MermaidDiagram chart="graph TD\\nA[💡 Plan] --> B[🎨 Design]\\nB --> C[💻 Code]\\nC --> D[🧪 Test]\\nD --> E[🚀 Deploy]\\nE --> F[🔧 Maintain]\\nF --> G[📊 Analytics]\\nG --> A" title="Modern Web Development Lifecycle" type="flowchart" />
-
-<AdvancedAnimation type="codingAnimation" title="Your First Code" props={"code": "console.log('Hello, World!');\\nconsole.log('Welcome to coding!');", "language": "javascript", "speed": 80} />
-
-## Next Steps
-
-Ready to dive deeper? Let's move on to the next chapter!`,
-    },
-    {
-      id: 2,
-      title: "HTML Fundamentals & Structure",
-      duration: "60 min",
-      completed: true,
-      content: `# HTML Fundamentals
-
-HTML is the backbone of every website. Let's explore its structure and elements.
-
-## HTML Document Structure
-
-Every HTML document follows a specific structure:
-
-\`\`\`html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <!-- Content goes here -->
-</body>
-</html>
-\`\`\`
-
-## Common HTML Elements
-
-Here are some common HTML elements you'll use frequently:
-
-- **Headings**: \`<h1>\` to \`<h6>\`
-- **Paragraphs**: \`<p>\`
-- **Links**: \`<a>\`
-- **Images**: \`<img>\`
-- **Lists**: \`<ul>\`, \`<ol>\`, \`<li>\`
-- **Divs**: \`<div>\`
-- **Spans**: \`<span>\`
-
-<Quiz question="Which HTML element is used for the largest heading?" options={["<h1>", "<h6>", "<header>", "<title>"]} correct={0} />
-
-<YouTubeEmbed videoId="qz0aGYrrlhU" title="HTML Elements Explained" />
-
-## HTML Element Hierarchy
-
-<MermaidDiagram chart="graph TD\\nHTML[🌐 html] --> HEAD[📋 head]\\nHTML --> BODY[📄 body]\\nHEAD --> TITLE[📝 title]\\nHEAD --> META[🏷️ meta]\\nHEAD --> LINK[🔗 link]\\nBODY --> HEADER[🎯 header]\\nBODY --> MAIN[📊 main]\\nBODY --> FOOTER[🔚 footer]\\nMAIN --> SECTION[📖 section]\\nMAIN --> ARTICLE[📰 article]\\nMAIN --> DIV[📦 div]" title="HTML5 Semantic Structure" type="flowchart" />
-
-## HTML Usage Statistics
-
-<AdvancedAnimation type="dataVisualization" title="HTML Elements Usage" props={"data": [85, 72, 68, 45, 38, 29], "label": "Most Used HTML Elements (%)"} />
-
-Practice these elements in the next chapter!`,
-    },
-    {
-      id: 3,
-      title: "CSS & Mathematical Concepts",
-      duration: "75 min",
-      completed: false,
-      content: `# CSS Styling & Mathematical Concepts
-
-CSS (Cascading Style Sheets) is what makes websites beautiful and responsive.
-
-## CSS Basics
-
-CSS allows you to style HTML elements:
-
-\`\`\`css
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f5f5f5;
-}
-
-h1 {
-    color: #333;
-    text-align: center;
-}
-\`\`\`
-
-## Mathematical Formulas in Web Development
-
-Sometimes we need to display mathematical concepts. Here's the famous Einstein equation:
-
-<MathFormula formula="E = mc^2" display="true" />
-
-And here's an inline formula for the Pythagorean theorem: <MathFormula formula="a^2 + b^2 = c^2" display="false" />
-
-The quadratic formula is essential in programming:
-
-<MathFormula formula="x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}" display="true" />
-
-<Quiz question="Which CSS property is used to change the text color?" options={["color", "text-color", "font-color", "background-color"]} correct={0} />
-
-## CSS Box Model
-
-The CSS box model is fundamental to understanding layout:
-
-<MermaidDiagram chart="graph LR\\nContent[📄 Content] --> Padding[🔲 Padding]\\nPadding --> Border[🟫 Border]\\nBorder --> Margin[⬜ Margin]\\nMargin --> Element[🎯 Final Element]\\nstyle Content fill:#e1f5fe\\nstyle Padding fill:#f3e5f5\\nstyle Border fill:#fff3e0\\nstyle Margin fill:#e8f5e8" title="CSS Box Model Visualization" type="flowchart" />
-
-## CSS Animation Timeline
-
-<MermaidDiagram chart="timeline\\ntitle CSS Evolution Timeline\\n1996 : CSS 1\\n     : Basic styling\\n1998 : CSS 2\\n     : Positioning\\n     : Media types\\n2011 : CSS 3\\n     : Animations\\n     : Flexbox\\n2017 : CSS Grid\\n     : Grid layouts\\n2020 : CSS 4\\n     : Container queries" title="CSS Development History" type="timeline" />
-
-## CSS Selectors
-
-- **Element selector**: \`h1 { }\`
-- **Class selector**: \`.my-class { }\`
-- **ID selector**: \`#my-id { }\`
-
-<YouTubeEmbed videoId="1PnVor36_40" title="CSS Fundamentals" />
-
-## Flexbox Layout
-
-Modern CSS layout with Flexbox:
-
-\`\`\`css
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-\`\`\`
-
-<AdvancedAnimation type="morphingShapes" title="CSS Transformation Demo" props={"shapes": ["circle", "square", "triangle"], "speed": 1500} />
-
-Ready for JavaScript? Let's continue!`,
-    },
-    {
-      id: 4,
-      title: "JavaScript & Advanced Algorithms",
-      duration: "90 min",
-      completed: false,
-      content: `# JavaScript Basics & Algorithms
-
-JavaScript brings interactivity to your websites and involves complex algorithmic thinking.
-
-## Variables and Data Types
-
-\`\`\`javascript
-// Variables
-let name = "John";
-const age = 25;
-var isStudent = true;
-
-// Arrays
-let fruits = ["apple", "banana", "orange"];
-
-// Objects
-let person = {
-    name: "Alice",
-    age: 30,
-    city: "New York"
-};
-\`\`\`
-
-## Algorithm Complexity Analysis
-
-Understanding Big O notation is crucial for efficient programming:
-
-
-<MathFormula   formula="O(1) \lt O(\log n) \lt O(n) \lt O(n \log n) \lt O(n^2) \lt O(2^n)" display=true />
-
-<MermaidDiagram chart="graph LR\\nO1[⚡ O(1)\\nConstant] --> OLogN[📈 O(log n)\\nLogarithmic]\\nOLogN --> ON[📊 O(n)\\nLinear]\\nON --> ONLogN[📈📊 O(n log n)\\nLinearithmic]\\nONLogN --> ON2[📈📈 O(n²)\\nQuadratic]\\nON2 --> O2N[💥 O(2^n)\\nExponential]\\nstyle O1 fill:#4caf50\\nstyle OLogN fill:#8bc34a\\nstyle ON fill:#ffeb3b\\nstyle ONLogN fill:#ff9800\\nstyle ON2 fill:#f44336\\nstyle O2N fill:#9c27b0" title="Algorithm Complexity Comparison" type="flowchart" />
-
-## Network Topology in JavaScript
-
-Understanding how data flows in modern web applications:
-
-<AdvancedAnimation type="networkGraph" title="JavaScript Data Flow" props={"nodes": 12, "connections": 18, "animated": true} />
-
-<Quiz question="Which keyword is used to declare a constant in JavaScript?" options={["var", "let", "const", "constant"]} correct={2} />
-
-## Functions
-
-\`\`\`javascript
-function greet(name) {
-    return "Hello, " + name + "!";
-}
-
-// Arrow function
-const add = (a, b) => a + b;
-
-// Recursive function (Fibonacci)
-function fibonacci(n) {
-    if (n <= 1) return n;
-    return fibonacci(n - 1) + fibonacci(n - 2);
-}
-\`\`\`
-
-<YouTubeEmbed videoId="W6NZfCO5SIk" title="JavaScript Fundamentals" />
-
-## Data Structure Performance
-
-<AdvancedAnimation type="dataVisualization" title="Data Structure Operations (Time Complexity)" props={"data": [1, 5, 10, 15, 25, 100], "label": "Access Time (microseconds)"} />
-
-## Sorting Algorithm Comparison
-
-<MermaidDiagram chart="graph TD\\nA[🔢 Unsorted Array] --> B{Choose Algorithm}\\nB -->|Fast & Simple| C[⚡ Quick Sort\\nO(n log n)]\\nB -->|Stable| D[🔄 Merge Sort\\nO(n log n)]\\nB -->|Small Arrays| E[🐌 Bubble Sort\\nO(n²)]\\nB -->|Memory Efficient| F[🏃 Heap Sort\\nO(n log n)]\\nC --> G[✅ Sorted Array]\\nD --> G\\nE --> G\\nF --> G" title="Sorting Algorithm Decision Tree" type="flowchart" />
-
-Great progress! You're becoming a web developer!`,
-    },
-  ],
-}
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { useRouter } from "next/navigation"
+import { getQueryClient } from "@/lib/get-query-client"
+import { authClient } from "@/lib/auth-client"
 
 // OLD TYPE
 type Chapter = {
   id: string | null;
-        completed: boolean;
-        title: string;
-        duration: string;
-        content: string;
-}
-
-type CourseData = {
-  title: string
-  description: string
-  instructor: string
-  students: number
-  chapters: Chapter[]
+  completed: boolean;
+  title: string;
+  duration: string;
+  content: string;
 }
 
 // NEW TYPE
-
 type Prop = {
+  id: string | null;
+  authorId?: string; // Add authorId to the type
+  title: string;
+  description: string;
+  createdAt: Date | null;
+  updatedAt: Date | null;
+  chapters: {
     id: string | null;
+    completed: boolean;
     title: string;
-    description: string;
-    createdAt: Date | null;
-    updatedAt: Date | null;
-    chapters: {
-        id: string | null;
-        completed: boolean;
-        title: string;
-        duration: string;
-        content: string;
-    }[];
-    files: {
-        name: string;
-        id: string;
-        createdAt: Date;
-        size: number;
-        key: string;
-        type: string;
-    }[] | null;
+    duration: string;
+    content: string;
+  }[];
+  files: {
+    name: string;
+    id: string;
+    createdAt: Date;
+    size: number;
+    key: string;
+    type: string;
+  }[] | null;
 }
 
+// CourseStatus type
+type CourseStatusItem = {
+  chapterId: string;
+  completed: boolean;
+}
 
-export function CourseBuilder({courseData }: { courseData: Prop }) {
-  const [activeChapter, setActiveChapter] = useState(courseData.chapters[0].id)
+export function CourseBuilder({ courseData }: { courseData: Prop }) {
+
+  const session = authClient.useSession()
+  const userId = session?.data?.user.id
+
+  // Check if current user is the author
+  const isAuthor = courseData.authorId === userId
+
+  const router = useRouter()
+  const [activeChapter, setActiveChapter] = useState(courseData.chapters[0]?.id)
   const [isEditing, setIsEditing] = useState(false)
   const [editContent, setEditContent] = useState("")
   const [courseChapters, setCourseChapters] = useState(courseData.chapters)
   const [forceRender, setForceRender] = useState(0)
+  const [updatingChapter, setUpdatingChapter] = useState<string | null>(null)
+  const [shareTooltipOpen, setShareTooltipOpen] = useState(false)
+
+  const queryClient = useQueryClient()
+
+  const { data: courseStatus, isFetching, refetch} = useQuery<CourseStatusItem[]>({
+    queryKey: ["course-status", courseData.id],
+    queryFn: async () => {
+      const res = await fetch(`/api/course/${courseData.id}/status`)
+      return res.json()
+    },
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    refetchOnMount: false,
+    staleTime: 0, // Always consider data stale
+    gcTime: 0, // Don't cache the data
+  })
+
+  // Helper function to check if a chapter is completed
+  const isChapterCompleted = (chapterId: string | null): boolean => {
+    if (!chapterId || !courseStatus) return false
+    return courseStatus.some(status => status.chapterId === chapterId && status.completed)
+  }
+
+  // Get completed chapters count
+  const completedChaptersCount = courseStatus 
+    ? courseStatus.filter(status => status.completed).length 
+    : 0
+
+  const statusMutation = useMutation({
+    mutationFn: async ({ chapterId, completed }: { chapterId: string; completed: boolean }) => {
+      const res = await fetch(`/api/course/${courseData.id}/status`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chapterId, completed }),
+      })
+
+      if (!res.ok) throw new Error("Failed to update course")
+      return res.json()
+    },
+    onMutate: ({ chapterId }) => {
+      setUpdatingChapter(chapterId)
+    },
+    onSuccess: async () => {
+      // Force refetch the query data
+      await queryClient.invalidateQueries({ 
+        queryKey: ["course-status", courseData.id],
+        exact: true 
+      })
+      
+      // Also refetch immediately to ensure UI updates
+      await queryClient.refetchQueries({ 
+        queryKey: ["course-status", courseData.id],
+        exact: true 
+      })
+      
+      setForceRender(prev => prev + 1)
+      setUpdatingChapter(null)
+    },
+    onError: (error) => {
+      console.error("Failed to update chapter status:", error)
+      setUpdatingChapter(null)
+    }
+  })
+
+  
+  // Course metadata editing states - only for authors
+  const [isEditingCourse, setIsEditingCourse] = useState(false)
+  const [editingCourseTitle, setEditingCourseTitle] = useState(courseData.title)
+  const [editingCourseDescription, setEditingCourseDescription] = useState(courseData.description)
+  
+  // Chapter editing states - only for authors
+  const [editingChapterTitles, setEditingChapterTitles] = useState<{[key: string]: string}>({})
+  const [isEditingChapterTitles, setIsEditingChapterTitles] = useState(false)
 
   const currentChapter = courseChapters.find((ch) => ch.id === activeChapter)
+  const currentChapterCompleted = currentChapter ? isChapterCompleted(currentChapter.id) : false
 
-  const handleEdit = () => {
-    if (currentChapter) {
-      setEditContent(currentChapter.content)
-      setIsEditing(true)
+  // Share functionality
+  const handleShare = async () => {
+    const shareUrl = `${window.location.origin}/dashboard/share/${courseData.id}`
+    
+    try {
+      await navigator.clipboard.writeText(shareUrl)
+      setShareTooltipOpen(true)
+      setTimeout(() => setShareTooltipOpen(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy to clipboard:', err)
+      // Fallback: show the URL in an alert
+      alert(`Share URL: ${shareUrl}`)
     }
   }
 
-  const handleSave = (content: string) => {
-    if (currentChapter) {
-      // Create a new array with the updated chapter
-      const updatedChapters = courseChapters.map((chapter) =>
-        chapter.id === currentChapter.id ? { ...chapter, content } : chapter,
-      )
+  const handleEdit = () => {
+    if (!isAuthor || !currentChapter) return
+    setEditContent(currentChapter.content)
+    setIsEditing(true)
+  }
 
-      setCourseChapters(updatedChapters)
-      setIsEditing(false)
+  const { mutate: updateCourse, isPending: isSaving } = useMutation({
+    mutationFn: async (courseData: Prop) => {
+      // Process chapters to set new chapter IDs to null
+      const processedChapters = courseData.chapters.map(chapter => ({
+        ...chapter,
+        id: chapter.id?.startsWith('temp_') ? null : chapter.id
+      }))
 
-      // Force re-render of MDX content
-      setForceRender((prev) => prev + 1)
+      const processedCourseData = {
+        ...courseData,
+        chapters: processedChapters
+      }
+
+      const res = await fetch(`/api/course/${courseData.id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(processedCourseData),
+      })
+
+      if (!res.ok) throw new Error("Failed to update course")
+
+      return res.json()
+    },
+    onSuccess: () => {
+      // Refresh the router after successful update
+      router.refresh()
+      // Force re-render
+      setForceRender(prev => prev + 1)
     }
+  })
+
+  const handleSave = (content: string) => {
+    if (!isAuthor || !currentChapter) return
+    
+    const updatedChapters = courseChapters.map((chapter) =>
+      chapter.id === currentChapter.id ? { ...chapter, content } : chapter,
+    )
+
+    setCourseChapters(updatedChapters)
+    setIsEditing(false)
+
+    const updatedCourseData = {
+      ...courseData,
+      title: editingCourseTitle,
+      description: editingCourseDescription,
+      chapters: updatedChapters
+    }
+
+    updateCourse(updatedCourseData)
+    setForceRender((prev) => prev + 1)
   }
 
   const handleCancel = () => {
@@ -352,108 +230,426 @@ export function CourseBuilder({courseData }: { courseData: Prop }) {
     setEditContent("")
   }
 
-  return (
-    <div className="flex h-screen">
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col">
-        {/* Header */}
-        <div className="border-b  p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold ">{courseData.title}</h1>
-              <p className=" mt-1">{courseData.description}</p>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-4 text-sm ">
+  // Course metadata handlers - only for authors
+  const handleSaveCourseInfo = () => {
+    if (!isAuthor) return
+    
+    setIsEditingCourse(false)
+    const updatedCourseData = {
+      ...courseData,
+      title: editingCourseTitle,
+      description: editingCourseDescription,
+      chapters: courseChapters
+    }
+    updateCourse(updatedCourseData)
+  }
 
-                <div className="flex items-center gap-1">
-                  <Clock className="w-4 h-4" />
-                  {currentChapter?.duration}
+  const handleCancelCourseEdit = () => {
+    setIsEditingCourse(false)
+    setEditingCourseTitle(courseData.title)
+    setEditingCourseDescription(courseData.description)
+  }
+
+  // Chapter management handlers - only available in edit mode for authors
+  const handleAddChapter = () => {
+    if (!isAuthor) return
+    
+    const newChapter = {
+      id: `temp_${Date.now()}`, // Temporary ID, will be set to null in mutation
+      completed: false,
+      title: "New Chapter",
+      duration: "5 min",
+      content: "# New Chapter\n\nAdd your content here..."
+    }
+
+    const updatedChapters = [...courseChapters, newChapter]
+    setCourseChapters(updatedChapters)
+    setActiveChapter(newChapter.id)
+
+    // Initialize editing state for the new chapter
+    setEditingChapterTitles(prev => ({
+      ...prev,
+      [newChapter.id!]: newChapter.title
+    }))
+
+    // Automatically enter edit mode for the new chapter
+    setEditContent(newChapter.content)
+    setIsEditing(true)
+  }
+
+  const handleDeleteChapter = (chapterId: string) => {
+    if (!isAuthor || !isEditingChapterTitles) return // Only allow in edit mode for authors
+    
+    if (courseChapters.length <= 1) {
+      alert("Cannot delete the last chapter")
+      return
+    }
+
+    const updatedChapters = courseChapters.filter(ch => ch.id !== chapterId)
+    setCourseChapters(updatedChapters)
+
+    // Update active chapter if deleted chapter was active
+    if (activeChapter === chapterId) {
+      setActiveChapter(updatedChapters[0]?.id || null)
+    }
+
+    // Remove from editing titles
+    const updatedEditingTitles = { ...editingChapterTitles }
+    delete updatedEditingTitles[chapterId]
+    setEditingChapterTitles(updatedEditingTitles)
+  }
+
+  // Handle chapter switching while in content edit mode
+  const handleChapterSwitch = (chapterId: string | null) => {
+    if (isEditing) {
+      // Cancel current editing and switch
+      setIsEditing(false)
+      setEditContent("")
+    }
+    setActiveChapter(chapterId)
+  }
+
+  const handleSaveChapterTitles = () => {
+    if (!isAuthor) return
+    
+    const updatedChapters = courseChapters.map(chapter => {
+      const newTitle = editingChapterTitles[chapter.id!]
+      return newTitle ? { ...chapter, title: newTitle } : chapter
+    })
+
+    setCourseChapters(updatedChapters)
+    setIsEditingChapterTitles(false)
+    setEditingChapterTitles({})
+
+    const updatedCourseData = {
+      ...courseData,
+      title: editingCourseTitle,
+      description: editingCourseDescription,
+      chapters: updatedChapters
+    }
+    updateCourse(updatedCourseData)
+  }
+
+  const handleCancelChapterTitlesEdit = () => {
+    setIsEditingChapterTitles(false)
+    setEditingChapterTitles({})
+  }
+
+  const initializeChapterTitleEditing = () => {
+    if (!isAuthor) return
+    
+    const titleMap = courseChapters.reduce((acc, chapter) => {
+      acc[chapter.id!] = chapter.title
+      return acc
+    }, {} as {[key: string]: string})
+    
+    setEditingChapterTitles(titleMap)
+    setIsEditingChapterTitles(true)
+  }
+
+  if (!userId) return <div>Unauthorized</div>
+
+
+  return (
+    <TooltipProvider>
+      <div className="flex h-screen">
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col">
+          {/* Header */}
+          <div className="border-b p-6">
+            <div className="flex items-center justify-between">
+              <div className="flex-1 mr-4">
+                {isEditingCourse && isAuthor ? (
+                  <div className="space-y-3">
+                    <Input
+                      value={editingCourseTitle}
+                      onChange={(e) => setEditingCourseTitle(e.target.value)}
+                      className="text-2xl font-bold border-0 p-0 focus-visible:ring-0"
+                      placeholder="Course Title"
+                    />
+                    <Textarea
+                      value={editingCourseDescription}
+                      onChange={(e) => setEditingCourseDescription(e.target.value)}
+                      className="text-sm text-muted-foreground border-0 p-0 focus-visible:ring-0 resize-none"
+                      placeholder="Course Description"
+                      rows={2}
+                    />
+                    <div className="flex gap-2">
+                      <Button size="sm" onClick={handleSaveCourseInfo} disabled={isSaving}>
+                        <Save className="w-4 h-4 mr-1" />
+                        Save
+                      </Button>
+                      <Button size="sm" variant="outline" onClick={handleCancelCourseEdit}>
+                        <X className="w-4 h-4 mr-1" />
+                        Cancel
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h1 className="text-2xl font-bold">{editingCourseTitle}</h1>
+                      {isAuthor && (
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => setIsEditingCourse(true)}
+                          className="h-6 w-6 p-0"
+                        >
+                          <Edit3 className="w-3 h-3" />
+                        </Button>
+                      )}
+                    </div>
+                    <p className="mt-1 text-muted-foreground text-sm">{editingCourseDescription}</p>
+                  </div>
+                )}
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 text-sm">
+                  <div className="flex items-center gap-1">
+                    <Clock className="w-4 h-4" />
+                    {currentChapter?.duration}
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  {/* Share Button */}
+                  <Tooltip open={shareTooltipOpen} onOpenChange={setShareTooltipOpen}>
+                    <TooltipTrigger asChild>
+                      <Button
+                        onClick={handleShare}
+                        variant="outline"
+                        size="sm"
+                        className="flex items-center gap-2"
+                      >
+                        <Share2 className="w-4 h-4" />
+                        Share
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Link copied to clipboard!</p>
+                    </TooltipContent>
+                  </Tooltip>
+
+                  {/* Edit Button - Only for authors */}
+                  {isAuthor && (
+                    <Button
+                      onClick={isEditing ? handleCancel : handleEdit}
+                      variant={isEditing ? "outline" : "default"}
+                      size="sm"
+                      className="flex items-center gap-2"
+                      disabled={!currentChapter}
+                    >
+                      {isEditing ? (
+                        <>
+                          <Eye className="w-4 h-4" />
+                          Preview
+                        </>
+                      ) : (
+                        <>
+                          <Edit3 className="w-4 h-4" />
+                          Edit
+                        </>
+                      )}
+                    </Button>
+                  )}
                 </div>
               </div>
-              <Button
-                onClick={isEditing ? handleCancel : handleEdit}
-                variant={isEditing ? "outline" : "default"}
-                size="sm"
-                className="flex items-center gap-2"
-              >
-                {isEditing ? (
-                  <>
-                    <Eye className="w-4 h-4" />
-                    Preview
-                  </>
-                ) : (
-                  <>
-                    <Edit3 className="w-4 h-4" />
-                    Edit
-                  </>
-                )}
-              </Button>
             </div>
+          </div>
+
+          {/* Content */}
+          <div className="flex-1 overflow-hidden mx-auto">
+            <ScrollArea className="h-full">
+              <div className="p-6 max-w-4xl">
+                {currentChapter && (
+                  <div>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="flex items-center gap-2">
+                        {currentChapterCompleted ? (
+                          <CheckCircle className="w-5 h-5 text-green-500" />
+                        ) : (
+                          <Play className="w-5 h-5 text-blue-500" />
+                        )}
+                        <h2 className="text-xl font-semibold">{currentChapter.title}</h2>
+                      </div>
+                      <Badge variant={currentChapterCompleted ? "default" : "secondary"}>
+                        {currentChapterCompleted ? "Completed" : "In Progress"}
+                      </Badge>
+                    </div>
+
+                    {isEditing && isAuthor ? (
+                      <NotionEditor 
+                        initialContent={editContent} 
+                        onSave={handleSave} 
+                        onCancel={handleCancel} 
+                      />
+                    ) : (
+                      <MDXContent 
+                        key={`mdx-${activeChapter}-${forceRender}`} 
+                        content={currentChapter.content} 
+                      />
+                    )}
+                  </div>
+                )}
+                {!currentChapter && courseChapters.length === 0 && (
+                  <div className="text-center py-12">
+                    <p className="text-muted-foreground mb-4">No chapters yet</p>
+                    {isAuthor && (
+                      <Button onClick={handleAddChapter}>
+                        <Plus className="w-4 h-4 mr-2" />
+                        Add First Chapter
+                      </Button>
+                    )}
+                  </div>
+                )}
+              </div>
+            </ScrollArea>
           </div>
         </div>
 
-        {/* Content */}
-        <div className="flex-1 overflow-hidden mx-auto">
-          <ScrollArea className="h-full">
-            <div className="p-6 max-w-4xl">
-              {currentChapter && (
+        {/* Right Sidebar - Course Navigation */}
+        <div className="w-1/3 border-l px-2 py-4">
+          <Tabs defaultValue="chapters" className="w-full">
+            <TabsList>
+              <TabsTrigger value="chapters">Chapters</TabsTrigger>
+              <TabsTrigger value="assets">Assets</TabsTrigger>
+              <TabsTrigger value="chat">Smart Assistant</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="chapters" className="p-2 border-b">
+              <div className="flex items-center justify-between mb-4">
                 <div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="flex items-center gap-2">
-                      {currentChapter.completed ? (
-                        <CheckCircle className="w-5 h-5 text-green-500" />
-                      ) : (
-                        <Play className="w-5 h-5 text-blue-500" />
-                      )}
-                      <h2 className="text-xl font-semibold">{currentChapter.title}</h2>
-                    </div>
-                    <Badge variant={currentChapter.completed ? "default" : "secondary"}>
-                      {currentChapter.completed ? "Completed" : "In Progress"}
-                    </Badge>
-                  </div>
-
-                  {isEditing ? (
-                    <NotionEditor initialContent={editContent} onSave={handleSave} onCancel={handleCancel} />
-                  ) : (
-                    <MDXContent key={`mdx-${activeChapter}-${forceRender}`} content={currentChapter.content} />
-                  )}
+                  <h3 className="font-semibold">Course Content</h3>
+                  <p className="text-sm mt-1">
+                    {completedChaptersCount} of {courseChapters.length} completed
+                  </p>
                 </div>
-              )}
-            </div>
-          </ScrollArea>
+                {isAuthor && (
+                  <div className="flex gap-1">
+                    {isEditingChapterTitles ? (
+                      <>
+                        <Button size="sm" onClick={handleSaveChapterTitles} disabled={isSaving}>
+                          <Save className="w-3 h-3" />
+                        </Button>
+                        <Button size="sm" variant="outline" onClick={handleCancelChapterTitlesEdit}>
+                          <X className="w-3 h-3" />
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <Button size="sm" variant="outline" onClick={initializeChapterTitleEditing}>
+                          <Edit3 className="w-3 h-3" />
+                        </Button>
+                        <Button size="sm" onClick={handleAddChapter}>
+                          <Plus className="w-3 h-3" />
+                        </Button>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                {courseChapters.map((chapter, index) => {
+                  const chapterCompleted = isChapterCompleted(chapter.id)
+                  const isUpdating = updatingChapter === chapter.id
+                  
+                  // Debug logging
+                  console.log(`Chapter ${chapter.title}:`, {
+                    chapterId: chapter.id,
+                    completed: chapterCompleted,
+                    courseStatus: courseStatus
+                  })
+                  
+                  return (
+                    <Card
+                      onClick={() => {
+                        if (isEditingChapterTitles) return
+                        handleChapterSwitch(chapter.id)
+                      }}
+                      key={chapter.id}
+                      className={`cursor-pointer transition-colors p-0 ${
+                        activeChapter === chapter.id ? "border-primary bg-primary/5 py-4" : "hover:bg-muted/50"
+                      }`}
+                    >
+                      <CardContent className="p-3">
+                        <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-2 flex-1 min-w-0">
+                            {chapterCompleted ? (
+                              <CheckCircle className="w-8 h-8 text-green-500 flex-shrink-0" />
+                            ) : (
+                              <Play className="w-5 h-5 text-blue-500 flex-shrink-0" />
+                            )}
+                            
+                            {isEditingChapterTitles && isAuthor ? (
+                              <Input
+                                value={editingChapterTitles[chapter.id!] || chapter.title}
+                                onChange={(e) => setEditingChapterTitles(prev => ({
+                                  ...prev,
+                                  [chapter.id!]: e.target.value
+                                }))}
+                                className="h-auto p-0 border-0 text-sm font-medium focus-visible:ring-0"
+                                onClick={(e) => e.stopPropagation()}
+                              />
+                            ) : (
+                              <div className="flex-1 min-w-0">
+                                <h4 className="text-base font-semibold truncate">{chapter.title}</h4>
+                                <p className="text-xs text-muted-foreground">{chapter.duration}</p>
+                              </div>
+                            )}
+
+                            {!chapterCompleted && (
+                              <Button 
+                                variant={'secondary'} 
+                                size={'sm'}
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  statusMutation.mutate({
+                                    chapterId: chapter.id!,
+                                    completed: true,
+                                  })
+                                }}
+                                disabled={isUpdating}
+                              >
+                                {isUpdating ? 'Updating...' : 'Mark Completed'}
+                              </Button>
+                            )}
+                          </div>
+                          
+                          {isEditingChapterTitles && isAuthor && (
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                handleDeleteChapter(chapter.id!)
+                              }}
+                              className="h-6 w-6 p-0 text-destructive hover:text-destructive"
+                            >
+                              <Trash2 className="w-3 h-3" />
+                            </Button>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )
+                })}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="assets" className="p-4">
+              {courseData.files?.map((file) => (
+                <FileCard key={file.id} file={file} />
+              ))}
+            </TabsContent>
+            
+            <TabsContent value="chat">
+              <SmartAssistant files={courseData.files?.map(file => file.key) || []} />
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
-
-      {/* Right Sidebar - Course Navigation */}
-      <div className="w-1/3 border-l px-2 py-4 ">
-      <Tabs defaultValue="chapters" className="w-full">
-        <TabsList>
-          <TabsTrigger value="chapters">Chapters</TabsTrigger>
-          <TabsTrigger value="assets">Assets</TabsTrigger>
-          <TabsTrigger value="chat">Smart Assistant </TabsTrigger>
-        </TabsList>
-        <TabsContent value="chapters" className="p-2 border-b">
-          
-            <h3 className="font-semibold ">Course Content</h3>
-            <p className="text-sm  mt-1">
-              {courseChapters.filter((ch) => ch.completed).length} of {courseChapters.length} completed
-            </p>
-          
-
-          <CourseChapters courseChapters={courseChapters} activeChapter={activeChapter!} setActiveChapter={setActiveChapter} />
-          
-        </TabsContent>
-        <TabsContent value="assets" className="p-4">
-        {courseData.files?.map((file) => (
-          <FileCard key={file.id} file={file} />
-        ))}
-        </TabsContent>
-        <TabsContent value="chat">
-          <SmartAssistant files={courseData.files?.map(file => file.key) || []} />
-        </TabsContent>
-      </Tabs>
-      </div>
-    </div>
+    </TooltipProvider>
   )
 }

@@ -13,6 +13,7 @@ pnpm dev
 # or
 bun dev
 ```
+http://localhost:3000/dashboard/share/58ab4555-f31c-4c3d-bd1b-e30b29e06303
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
