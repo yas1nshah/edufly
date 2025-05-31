@@ -1,6 +1,7 @@
 import { auth } from "@/lib/auth"
 import db from "@/lib/db"
 import { NextRequest } from "next/server"
+import { redirect } from 'next/navigation'
 
 export const GET = async (req: NextRequest, { params }: { params: { id: string } }) => {
   const id = params.id
@@ -24,10 +25,5 @@ export const GET = async (req: NextRequest, { params }: { params: { id: string }
     },
   })
 
-  return new Response(null, {
-    status: 302,
-    headers: {
-      Location: `/dashboard/courses/${id}`,
-    },
-  })
+  return redirect(`/dashboard/courses/${id}`)
 }
