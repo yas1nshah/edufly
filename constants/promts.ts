@@ -28,6 +28,7 @@ OTHER AVAIABLE COMPONENTS Other then MDX components
 3. <YouTubeEmbed videoId="INSERT VIDEO LINK HERE" title="Intro Video" /> : (If a Video is added, it must be a valid YouTube video link. The video must be active and relevant to the course content.)
 
 IMPORTANT: Content must include valid markdown but dont forget to use Escape character for backticks and other character which might break JSON, When using components double check them to prevent any error.
+WARNING: when using code blocks dont forget to use triple backticks with escape characs otherwhite itwill break, example: \`\`\` javascript console.log('Hello'); \`\`\`
 ---
 
 The list of links for course generation will be provided immediately following this prompt. Begin generation upon receiving the links.
