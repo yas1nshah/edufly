@@ -51,8 +51,9 @@ model SharedCourse {
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  provider      = "prisma-client-js"
+  output        = "../generated/prisma"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
