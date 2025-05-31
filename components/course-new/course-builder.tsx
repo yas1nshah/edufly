@@ -183,7 +183,7 @@ export function CourseBuilder({ courseData }: { courseData: Prop }) {
 
   // Share functionality
   const handleShare = async () => {
-    const shareUrl = `${process.env.BETTER_AUTH_URL}/dashboard/share/${courseData.id}`
+    const shareUrl = `${process.env.BETTER_AUTH_URL!}/dashboard/share/${courseData.id}`
     
     try {
       await navigator.clipboard.writeText(shareUrl)
