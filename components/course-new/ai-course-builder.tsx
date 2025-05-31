@@ -77,6 +77,7 @@ const AiCourseBuilder: React.FC<AiCourseBuilderProps> = ({ selected }) => {
       // Escape any remaining triple backticks
       cleanedResult = cleanedResult.replace(/```/g, '\\`\\`\\`')
       cleanedResult = cleanedResult.replace(/``/g, '\\`\\`')
+      cleanedResult = cleanedResult.replace(/`/g, '\\`')
 
       const courseStructure = JSON.parse(cleanedResult)
 
