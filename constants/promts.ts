@@ -15,7 +15,7 @@ The entire output MUST be a single JSON object. No extraneous text or explanatio
       "title": "Chapter Title", // Descriptive title for the chapter, derived from content
       "duration": "Estimated duration (e.g., 30 min, 1 hour, 90 min)", // Estimated time to complete the chapter, based on its content length and complexity
       "completed": false,
-      "content": %%...%% // Wrap content in %% instead of "
+      "content": "..."
     }
     // ... additional chapters if applicable
   ]

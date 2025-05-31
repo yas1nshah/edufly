@@ -71,13 +71,9 @@ const AiCourseBuilder: React.FC<AiCourseBuilderProps> = ({ selected }) => {
       }
 
       // Parse the AI response
-      let cleanedResult = result.replace(/```json\n?/, '').replace(/\n?```$/, '')
-      // Escape all quotes
-      cleanedResult = cleanedResult.replace(/"/g, '\\"')
-      // Replace %% with quotes (this handles both %%content%% and standalone %%)
-      cleanedResult = cleanedResult.replace(/%%/g, '"')
+      const cleanedResult = result.replace(/```json([\s\S]*?)```/, (_, p1) => p1.trim())
       const courseStructure = JSON.parse(cleanedResult)
-
+      
       setIsGenerating(false)
       setIsCreating(true)
 
