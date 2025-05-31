@@ -1,37 +1,155 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎓 EduFly — AI-Enhanced LMS Prototype
 
-## Getting Started
+EduFly is a cutting-edge Learning Management System prototype that integrates AI-powered content generation. Built with Next.js, Prisma, and Gemini AI, it enables educators to create rich, interactive lessons enhanced by smart automation — all while staying developer-friendly and fast.
 
-First, run the development server:
+---
+
+## ✨ Key Features
+
+- 🧠 **AI Integration**: Auto-generate lesson content using Gemini AI.
+- 📖 **Lesson Builder**: Create structured lessons with metadata and Markdown support.
+- 📊 **Dashboard UI**: A responsive, modern dashboard using Shadcn UI + TailwindCSS.
+- 📤 **File Uploads**: Upload images or media via UploadThing + Cloudflare R2.
+- 🔒 **Pluggable Auth**: Plug-and-play auth system with GitHub/Google OAuth support.
+
+---
+
+## 📸 Preview
+
+> *(Add a dashboard screenshot here — e.g. `public/preview.png`)*
+
+---
+
+## ⚙️ Tech Stack
+
+- **Frontend**: Next.js App Router, TailwindCSS, Shadcn UI
+- **Backend**: Prisma + MySQL
+- **AI**: Gemini API (Google Generative AI)
+- **Storage**: Cloudflare R2 via UploadThing
+- **Auth**: Better Auth (custom, Clerk-style)
+
+---
+
+## 🧪 .env Example
+
+Here’s the required `.env` configuration for development:
+
+```env
+# Gemini AI
+GEMINI_API_KEY=
+
+# MySQL DB
+DATABASE_URL=
+
+# Auth
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=http://localhost:3000
+
+# GitHub OAuth
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+
+# Google OAuth
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+
+# R2 Cloudflare
+R2_ENDPOINT=
+R2_BUCKET=
+R2_ACCESS_KEY=
+R2_SECRET_KEY=
+R2_PUBLIC_HOST=
+````
+
+---
+
+## 🛠 Getting Started
+
+Clone the repo and run the following:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yas1nshah/edufly.git
+cd edufly
+npm install
 ```
-http://localhost:3000/dashboard/share/58ab4555-f31c-4c3d-bd1b-e30b29e06303
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Push the DB schema:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npx prisma db push dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Start the dev server:
 
-## Learn More
+```bash
+npm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧱 Project Structure
 
-## Deploy on Vercel
+```
+app/             → App Router pages & layouts
+components/      → Reusable UI components
+lib/             → Utility functions ( R2, etc.)
+prisma/          → Prisma schema
+public/          → Static files (images, previews)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🧠 AI Usage
+
+EduFly uses Gemini AI for:
+
+* Generating lesson outlines and summaries
+* Answer suggestions (in-progress)
+
+Implemented in: `lib/ai/gemini.ts`
+
+---
+
+## 📦 R2 Integration
+
+File uploads (images/media) are securely handled via Pre-Signed URLs and stored in your Cloudflare R2 bucket.
+
+---
+
+## 📌 TODO / WIP
+
+* ✅ AI lesson generation
+* ✅ Quizzes via AI
+* ⏳ Class/course grouping
+* ⏳ User + role-based access system
+
+---
+
+## 🤝 Contributing
+
+Pull requests and contributions are welcome!
+
+1. Fork this repo
+2. Create a new branch
+3. Commit your changes
+4. Open a PR with a clear description
+
+---
+
+## 🔒 License
+
+MIT © 2025 [Yasin Shah](https://github.com/yas1nshah)
+
+---
+
+## 🌐 Follow the Creator
+
+* GitHub: [@yas1nshah](https://github.com/yas1nshah)
+* Twitter: [@yas1nshah](https://twitter.com/yas1nshah)
+* Company: [Uraan Studios](https://uraanstudios.com)
+
+> Built with ❤️ by Uraan Studios to modernize education through AI.
+
+```
