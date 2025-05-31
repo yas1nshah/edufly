@@ -33,6 +33,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import ActivePlan from "./usage/plan"
 
 const data = {
   user: {
@@ -43,13 +44,8 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/dashboard",
       icon: IconDashboard,
-    },
-    {
-      title: "Analytics",
-      url: "#",
-      icon: IconChartBar,
     },
     {
       title: "Cources",
@@ -168,10 +164,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavDocuments items={data.documents} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <div className="p-2 rounded-sm bg-yellow-700/25 text-destructive-foreground/80 text-xs">We&apos;re using Free Tier,<br/>Gemini requests can be Rate Limited.</div>  
+        <ActivePlan/>
+        <NavUser/>
       </SidebarFooter>
     </Sidebar>
   )

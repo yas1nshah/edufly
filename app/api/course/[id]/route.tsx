@@ -49,14 +49,21 @@ export const GET = async (req: NextRequest, {params}: {params: Promise<{id: stri
     },
   })
 
-  console.log(course)
-
   if (!course) {
     return new Response("Not found", { status: 405 })
   }
 
   if (course.authorId !== userId) {
-    return new Response("Unauthorized", { status: 401 })
+    const isShared = await db.sharedCourse.findFirst({
+      where: {
+        courseId: course.id,
+        sharedWith: userId,
+      },
+    })
+
+    if (!isShared) {
+      return new Response("Unauthorized", { status: 401 })
+    }
   }
 
   const completions = await db.userCourseCompletion.findMany({
@@ -84,6 +91,7 @@ export const GET = async (req: NextRequest, {params}: {params: Promise<{id: stri
     id: course.id,
     title: course.title,
     description: course.description,
+    authorId: course.authorId,
     createdAt: course.createdAt,
     updatedAt: course.updatedAt,
     chapters,

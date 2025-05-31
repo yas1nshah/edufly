@@ -8,13 +8,19 @@ export const GET = async (req: Request) => {
 
   if (!user) return new Response("Unauthorized", { status: 401 })
 
+  const shared = await db.sharedCourse.findMany({
+    where: {
+      sharedWith: user,
+    },
+  })
+
+  const sharedCourses = shared.map((s) => s.courseId)
+
   const courses = await db.course.findMany({
     where: {
-      sharedWith: {
-        some: {
-            id: user,
-        }
-      },
+      id: {
+        in: sharedCourses,
+      } 
     },
     select: {
         id: true,

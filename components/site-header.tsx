@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
+import { GitHubIcon } from "@daveyplate/better-auth-ui"
 
 export function SiteHeader({title}: { title?: string }) {
   return (
@@ -13,13 +14,14 @@ export function SiteHeader({title}: { title?: string }) {
         />
         <h1 className="text-base font-medium">{title}</h1>
         <div className="ml-auto flex items-center gap-2">
-          <Button variant="ghost" asChild size="sm" className="hidden sm:flex">
+          <Button variant="outline" asChild size="sm" className="hidden sm:flex">
             <a
-              href="https://github.com/shadcn-ui/ui/tree/main/apps/v4/app/(examples)/dashboard"
+              href="https://github.com/yas1nshah/edufly"
               rel="noopener noreferrer"
               target="_blank"
               className="dark:text-foreground"
             >
+              <GitHubIcon className="h-5 w-5" />
               GitHub
             </a>
           </Button>

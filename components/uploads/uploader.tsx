@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useDropzone } from "react-dropzone"
 import { v4 as uuid } from "uuid"
 import { Button } from "@/components/ui/button"
@@ -22,6 +22,8 @@ type FileItem = {
 
 interface FileUploaderProps {
   onBack?: () => void
+  fileType?: string
+  onUploadComplete?: (fileIds: string[]) => void
 }
 
 function getFileIcon(type: string) {
@@ -39,7 +41,64 @@ function formatFileSize(bytes: number) {
   return Number.parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i]
 }
 
-export function FileUploader({ onBack }: FileUploaderProps) {
+function getAcceptTypes(fileType?: string) {
+  if (!fileType) {
+    return {
+      "image/*": [".png", ".jpg", ".jpeg", ".gif", ".webp"],
+      "video/*": [".mp4", ".mov", ".avi", ".mkv"],
+      "application/pdf": [".pdf"],
+      "text/*": [".txt", ".md", ".csv"],
+      "application/*": [".zip", ".rar", ".7z"],
+    }
+  }
+
+  const acceptTypes: Record<string, string[]> = {}
+  
+  switch (fileType) {
+    case "application/pdf":
+      acceptTypes["application/pdf"] = [".pdf"]
+      break
+    case "image/*":
+      acceptTypes["image/*"] = [".png", ".jpg", ".jpeg", ".gif", ".webp"]
+      break
+    case "video/*":
+      acceptTypes["video/*"] = [".mp4", ".mov", ".avi", ".mkv"]
+      break
+    case "text/*":
+      acceptTypes["text/*"] = [".txt", ".md", ".csv"]
+      break
+    case "application/*":
+      acceptTypes["application/*"] = [".zip", ".rar", ".7z"]
+      break
+    default:
+      acceptTypes[fileType] = []
+      break
+  }
+  
+  return acceptTypes
+}
+
+function getFileTypeLabel(fileType?: string) {
+  if (!fileType) return "all file types"
+  
+  switch (fileType) {
+    case "application/pdf":
+      return "PDF files"
+    case "image/*":
+      return "images"
+    case "video/*":
+      return "videos"
+    case "text/*":
+      return "text files"
+    case "application/*":
+      return "archive files"
+    default:
+      return fileType.replace("/*", " files")
+  }
+}
+
+export function FileUploader({ onBack, fileType, onUploadComplete }: FileUploaderProps) {
+  const queryClient = useQueryClient()
   const [files, setFiles] = useState<FileItem[]>([])
 
   const onDrop = (acceptedFiles: File[]) => {
@@ -70,13 +129,7 @@ export function FileUploader({ onBack }: FileUploaderProps) {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     multiple: true,
-    accept: {
-      "image/*": [".png", ".jpg", ".jpeg", ".gif", ".webp"],
-      "video/*": [".mp4", ".mov", ".avi", ".mkv"],
-      "application/pdf": [".pdf"],
-      "text/*": [".txt", ".md", ".csv"],
-      "application/*": [".zip", ".rar", ".7z"],
-    },
+    accept: getAcceptTypes(fileType),
   })
 
   const confirmUpload = async ({
@@ -92,11 +145,13 @@ export function FileUploader({ onBack }: FileUploaderProps) {
     type: string
     tags?: string[]
   }) => {
-    await fetch("/api/upload/confirm", {
+    const response = await fetch("/api/upload/confirm", {
       method: "POST",
       body: JSON.stringify({ key, size, name, type, tags }),
       headers: { "Content-Type": "application/json" },
     })
+    const data = await response.json()
+    return data.id // Return the file ID from the database
   }
 
   const uploadFile = async (item: FileItem) => {
@@ -121,7 +176,7 @@ export function FileUploader({ onBack }: FileUploaderProps) {
     // 2. Upload to R2 with progress simulation
     const xhr = new XMLHttpRequest()
 
-    return new Promise((resolve, reject) => {
+    return new Promise<string>((resolve, reject) => {
       xhr.upload.addEventListener("progress", (e) => {
         if (e.lengthComputable) {
           const progress = Math.round((e.loaded / e.total) * 100)
@@ -131,15 +186,15 @@ export function FileUploader({ onBack }: FileUploaderProps) {
 
       xhr.addEventListener("load", async () => {
         if (xhr.status === 200) {
-          // 3. Confirm upload to DB
-          await confirmUpload({
+          // 3. Confirm upload to DB and get file ID
+          const fileId = await confirmUpload({
             key,
             size: file.size,
             name: file.name,
             type: file.type,
             tags: [],
           })
-          resolve(true)
+          resolve(fileId)
         } else {
           reject(new Error("Upload failed"))
         }
@@ -160,12 +215,14 @@ export function FileUploader({ onBack }: FileUploaderProps) {
   const { mutateAsync: uploadAllFiles, isPending } = useMutation({
     mutationFn: async () => {
       const pendingFiles = files.filter((f) => f.status === "pending")
+      const uploadedFileIds: string[] = []
 
       for (const item of pendingFiles) {
         setFiles((prev) => prev.map((f) => (f.id === item.id ? { ...f, status: "uploading", progress: 0 } : f)))
 
         try {
-          await uploadFile(item)
+          const fileId = await uploadFile(item)
+          uploadedFileIds.push(fileId)
 
           setFiles((prev) => prev.map((f) => (f.id === item.id ? { ...f, status: "done", progress: 100 } : f)))
         } catch (err: any) {
@@ -175,12 +232,21 @@ export function FileUploader({ onBack }: FileUploaderProps) {
         }
       }
 
+      if (uploadedFileIds.length > 0) {
+        toast.success(`${uploadedFileIds.length} file${uploadedFileIds.length !== 1 ? 's' : ''} uploaded successfully!`)
+        onUploadComplete?.(uploadedFileIds)
+      }
+    },
+
+    onSuccess: () => {
       toast.success("All uploads complete!")
+      queryClient.invalidateQueries({ queryKey: ["ai-builder-files"] })
     },
   })
 
   const pendingFiles = files.filter((f) => f.status === "pending")
   const hasFiles = files.length > 0
+  const fileTypeLabel = getFileTypeLabel(fileType)
 
   return (
     <div className="space-y-6">
@@ -188,7 +254,12 @@ export function FileUploader({ onBack }: FileUploaderProps) {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold">Upload Files</h2>
-          <p className="text-muted-foreground">Drag and drop your files or click to browse</p>
+          <p className="text-muted-foreground">
+            {fileType 
+              ? `Upload ${fileTypeLabel} by dragging and dropping or clicking to browse`
+              : "Drag and drop your files or click to browse"
+            }
+          </p>
         </div>
         {onBack && (
           <Button variant="outline" onClick={onBack}>
@@ -231,7 +302,10 @@ export function FileUploader({ onBack }: FileUploaderProps) {
                 {isDragActive ? "Drop files here" : "Choose files or drag them here"}
               </p>
               <p className="text-sm text-muted-foreground">
-                Supports images, videos, PDFs, and documents up to 10MB each
+                {fileType 
+                  ? `Supports ${fileTypeLabel} up to 10MB each`
+                  : "Supports images, videos, PDFs, and documents up to 10MB each"
+                }
               </p>
             </div>
           </motion.div>

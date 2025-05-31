@@ -37,7 +37,7 @@ export function CompactFileSelection({
   fileType = "all",
 }: CompactFileSelectionProps) {
   const { data, isLoading, error } = useQuery<{ files: FileType[] }>(
-    { queryKey: ["user-files", fileType], 
+    { queryKey: ["ai-builder-files"], 
       queryFn : async () => {
         // Build query param only if fileType is specified and not "all"
       const query = fileType !== "all" ? `?type=${encodeURIComponent(fileType)}` : ""

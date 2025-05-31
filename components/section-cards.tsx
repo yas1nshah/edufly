@@ -1,3 +1,5 @@
+"use client"
+
 import { IconTrendingDown, IconTrendingUp } from "@tabler/icons-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -9,15 +11,32 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { useQuery } from "@tanstack/react-query"
 
 export function SectionCards() {
+  const {data, isFetching} = useQuery({
+    queryKey: ['stats'],
+    queryFn: async () => {
+      const res = await fetch('/api/stats')
+      return res.json()
+    }
+  })
+
+  if (isFetching) {
+    return <div>Loading...</div>
+  }
+
+  if (!data) {
+    return <div>Error</div>
+  }
+
   return (
     <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription>Total Revenue</CardDescription>
+          <CardDescription>Cources Created</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            $1,250.00
+            {data.cources}
           </CardTitle>
           <CardAction>
             <Badge variant="outline">
@@ -31,15 +50,15 @@ export function SectionCards() {
             Trending up this month <IconTrendingUp className="size-4" />
           </div>
           <div className="text-muted-foreground">
-            Visitors for the last 6 months
+            Total number of cources created
           </div>
         </CardFooter>
       </Card>
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription>New Customers</CardDescription>
+          <CardDescription>Files Uploaded</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            1,234
+            {data.files}
           </CardTitle>
           <CardAction>
             <Badge variant="outline">
