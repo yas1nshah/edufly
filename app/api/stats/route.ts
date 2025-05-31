@@ -5,7 +5,7 @@ import { NextRequest } from "next/server";
 
 export const GET = async (req: NextRequest) => {
   const session = await auth.api.getSession(req);
-  const userId = session?.user.id;
+  const userId =  session?.user.id;
 
   if (!userId) return new Response("Unauthorized", { status: 401 });
 

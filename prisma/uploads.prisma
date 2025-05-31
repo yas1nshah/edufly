@@ -40,12 +40,12 @@ model File {
 
 
 model Usage {
-  id          String   @id @default(uuid())
-  userId      String
-  user        User     @relation(fields: [userId], references: [id])
-  type        String   // e.g., "storage", "ai_tokens"
-  value       Int      // value used (e.g. 345MB, 200 tokens)
-  createdAt   DateTime @default(now())
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  type      String   // e.g., "storage", "ai_tokens"
+  value     Int      // value used (e.g. 345MB, 200 tokens)
+  createdAt DateTime @default(now())
 
-  @@index([userId, type])
+  @@unique([userId, type]) // ✅ This is required for upsert
 }

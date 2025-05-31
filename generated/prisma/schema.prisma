@@ -175,5 +175,5 @@ model Usage {
   value     Int // value used (e.g. 345MB, 200 tokens)
   createdAt DateTime @default(now())
 
-  @@index([userId, type])
+  @@unique([userId, type]) // ✅ This is required for upsert
 }

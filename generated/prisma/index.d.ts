@@ -14800,6 +14800,7 @@ export namespace Prisma {
 
   export type UsageWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    userId_type?: UsageUserIdTypeCompoundUniqueInput
     AND?: UsageWhereInput | UsageWhereInput[]
     OR?: UsageWhereInput[]
     NOT?: UsageWhereInput | UsageWhereInput[]
@@ -14808,7 +14809,7 @@ export namespace Prisma {
     value?: IntFilter<"Usage"> | number
     createdAt?: DateTimeFilter<"Usage"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+  }, "id" | "userId_type">
 
   export type UsageOrderByWithAggregationInput = {
     id?: SortOrder
@@ -16394,6 +16395,11 @@ export namespace Prisma {
     fields: UsageOrderByRelevanceFieldEnum | UsageOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
+  }
+
+  export type UsageUserIdTypeCompoundUniqueInput = {
+    userId: string
+    type: string
   }
 
   export type UsageCountOrderByAggregateInput = {
