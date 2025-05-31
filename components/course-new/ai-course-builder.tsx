@@ -71,8 +71,16 @@ const AiCourseBuilder: React.FC<AiCourseBuilderProps> = ({ selected }) => {
       }
 
       // Parse the AI response
-      const cleanedResult = result.replace(/```json([\s\S]*?)```/, (_, p1) => p1.trim())
+      // Extract and clean JSON from ```json ... ``` block
+      let cleanedResult = result.replace(/```json([\s\S]*?)```/, (_, p1) => p1.trim())
+
+      // Escape any remaining triple backticks
+      cleanedResult = cleanedResult.replace(/```/g, '\\`\\`\\`')
+      cleanedResult = cleanedResult.replace(/``/g, '\\`\\`')
+
       const courseStructure = JSON.parse(cleanedResult)
+
+
       
       setIsGenerating(false)
       setIsCreating(true)
