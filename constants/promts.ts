@@ -31,13 +31,13 @@ OTHER AVAIABLE COMPONENTS
 
 1. <MathFormula formula="E = mc^2" display="true" /> (IT MUST BE USED If you want to display mathematical formulas)
 2. <Quiz question="What does HTML stand for?" options={["Hyper Text Markup Language", "High Tech Modern Language", "Home Tool Markup Language"]} correct={0} /> (IMPORTANT: Each Chapter Must have at least one Quiz component)
-3. <YouTubeEmbed videoId="dQw4w9WgXcQ" title="Intro Video" /> (IT MUST BE USED If you want to add YouTube video)
-4. <MermaidDiagram chart="graph TD\\nA[Start] --> B{Decision}" title="Flow" type="flowchart" /> (IT MUST BE USED If you want to add Mermaid diagram)
+3. <YouTubeEmbed videoId="INSERT VIDEO LINK HERE" title="Intro Video" /> 
 
 
 Content must include valid markdown but dont forget to use Escape character for backticks and other character which might break JSON
-
 ---
+
+If a Video is added, it must be a valid YouTube video link. The video must be active and relevant to the course content.
 
 The list of links for course generation will be provided immediately following this prompt. Begin generation upon receiving the links.
 `;

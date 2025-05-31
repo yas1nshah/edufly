@@ -9,6 +9,8 @@ import { Play, CheckCircle, Clock, Users, Edit3, Eye } from "lucide-react"
 import { MDXContent } from "@/components/course-new/mdx-content"
 import { NotionEditor } from "@/components/course-new/notion-editor"
 import CourseChapters from "./course-sections"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs"
+import FileCard from "./file-card"
 
 // Sample course data with advanced components
 const temp = {
@@ -270,12 +272,13 @@ Great progress! You're becoming a web developer!`,
   ],
 }
 
+// OLD TYPE
 type Chapter = {
-  id: number
-  title: string
-  duration: string
-  completed: boolean
-  content: string
+  id: string | null;
+        completed: boolean;
+        title: string;
+        duration: string;
+        content: string;
 }
 
 type CourseData = {
@@ -286,10 +289,34 @@ type CourseData = {
   chapters: Chapter[]
 }
 
+// NEW TYPE
+
+type Prop = {
+    id: string | null;
+    title: string;
+    description: string;
+    createdAt: Date | null;
+    updatedAt: Date | null;
+    chapters: {
+        id: string | null;
+        completed: boolean;
+        title: string;
+        duration: string;
+        content: string;
+    }[];
+    files: {
+        name: string;
+        id: string;
+        createdAt: Date;
+        size: number;
+        key: string;
+        type: string;
+    }[] | null;
+}
 
 
-export function CourseBuilder({courseData = temp }: { courseData: CourseData }) {
-  const [activeChapter, setActiveChapter] = useState(1)
+export function CourseBuilder({courseData }: { courseData: Prop }) {
+  const [activeChapter, setActiveChapter] = useState(courseData.chapters[0].id)
   const [isEditing, setIsEditing] = useState(false)
   const [editContent, setEditContent] = useState("")
   const [courseChapters, setCourseChapters] = useState(courseData.chapters)
@@ -337,10 +364,7 @@ export function CourseBuilder({courseData = temp }: { courseData: CourseData }) 
             </div>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-4 text-sm ">
-                <div className="flex items-center gap-1">
-                  <Users className="w-4 h-4" />
-                  {courseData.students.toLocaleString()} students
-                </div>
+
                 <div className="flex items-center gap-1">
                   <Clock className="w-4 h-4" />
                   {currentChapter?.duration}
@@ -401,15 +425,31 @@ export function CourseBuilder({courseData = temp }: { courseData: CourseData }) 
       </div>
 
       {/* Right Sidebar - Course Navigation */}
-      <div className="w-80 border-l ">
-        <div className="p-4 border-b ">
-          <h3 className="font-semibold ">Course Content</h3>
-          <p className="text-sm  mt-1">
-            {courseChapters.filter((ch) => ch.completed).length} of {courseChapters.length} completed
-          </p>
-        </div>
+      <div className="w-1/3 border-l px-2 py-4 ">
+      <Tabs defaultValue="chapters" className="w-full">
+        <TabsList>
+          <TabsTrigger value="chapters">Chapters</TabsTrigger>
+          <TabsTrigger value="assets">Assets</TabsTrigger>
+          <TabsTrigger value="chat">Smart Assistant </TabsTrigger>
+        </TabsList>
+        <TabsContent value="chapters" className="p-2 border-b">
+          
+            <h3 className="font-semibold ">Course Content</h3>
+            <p className="text-sm  mt-1">
+              {courseChapters.filter((ch) => ch.completed).length} of {courseChapters.length} completed
+            </p>
+          
 
-        <CourseChapters courseChapters={courseChapters} activeChapter={activeChapter} setActiveChapter={setActiveChapter} />
+          <CourseChapters courseChapters={courseChapters} activeChapter={activeChapter!} setActiveChapter={setActiveChapter} />
+          
+        </TabsContent>
+        <TabsContent value="assets" className="p-4">
+        {courseData.files?.map((file) => (
+          <FileCard key={file.id} file={file} />
+        ))}
+        </TabsContent>
+        <TabsContent value="chat">Change your password here.</TabsContent>
+      </Tabs>
       </div>
     </div>
   )

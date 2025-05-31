@@ -7,7 +7,7 @@ import { Card, CardContent } from '../ui/card'
 
 
 
-const CourseChapters = ({courseChapters, activeChapter, setActiveChapter}: {courseChapters: Chapter[], activeChapter: number, setActiveChapter: React.Dispatch<React.SetStateAction<number>>}) => {
+const CourseChapters = ({courseChapters, activeChapter, setActiveChapter}: {courseChapters: Chapter[], activeChapter: string, setActiveChapter: React.Dispatch<React.SetStateAction<string | null>>}) => {
     
     const currentChapter = courseChapters.find((ch) => ch.id === activeChapter)
  
@@ -20,7 +20,7 @@ const CourseChapters = ({courseChapters, activeChapter, setActiveChapter}: {cour
                 className={`cursor-pointer transition-all hover:shadow-md py-0 ${
                   activeChapter === chapter.id ? "ring-2 ring-primary bg-accent py-4" : ""
                 }`}
-                onClick={() => setActiveChapter(chapter.id)}
+                onClick={() => setActiveChapter(chapter.id!)}
               >
                 <CardContent className="p-4">
                   <div className="flex items-center gap-3 ">

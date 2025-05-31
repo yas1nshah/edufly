@@ -120,14 +120,27 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.ChapterScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  duration: 'duration',
+  content: 'content',
+  courseId: 'courseId'
+};
+
 exports.Prisma.CourseScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
-  content: 'content',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   authorId: 'authorId'
+};
+
+exports.Prisma.UserCourseCompletionScalarFieldEnum = {
+  userId: 'userId',
+  chapterId: 'chapterId',
+  completed: 'completed'
 };
 
 exports.Prisma.SharedCourseScalarFieldEnum = {
@@ -241,11 +254,23 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.ChapterOrderByRelevanceFieldEnum = {
+  id: 'id',
+  title: 'title',
+  duration: 'duration',
+  courseId: 'courseId'
+};
+
 exports.Prisma.CourseOrderByRelevanceFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
   authorId: 'authorId'
+};
+
+exports.Prisma.UserCourseCompletionOrderByRelevanceFieldEnum = {
+  userId: 'userId',
+  chapterId: 'chapterId'
 };
 
 exports.Prisma.SharedCourseOrderByRelevanceFieldEnum = {
@@ -320,7 +345,9 @@ exports.Prisma.UsageOrderByRelevanceFieldEnum = {
 
 
 exports.Prisma.ModelName = {
+  Chapter: 'Chapter',
   Course: 'Course',
+  UserCourseCompletion: 'UserCourseCompletion',
   SharedCourse: 'SharedCourse',
   User: 'User',
   Session: 'Session',

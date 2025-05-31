@@ -14,10 +14,20 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model Chapter
+ * 
+ */
+export type Chapter = $Result.DefaultSelection<Prisma.$ChapterPayload>
+/**
  * Model Course
  * 
  */
 export type Course = $Result.DefaultSelection<Prisma.$CoursePayload>
+/**
+ * Model UserCourseCompletion
+ * 
+ */
+export type UserCourseCompletion = $Result.DefaultSelection<Prisma.$UserCourseCompletionPayload>
 /**
  * Model SharedCourse
  * 
@@ -71,8 +81,8 @@ export type Usage = $Result.DefaultSelection<Prisma.$UsagePayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Courses
- * const courses = await prisma.course.findMany()
+ * // Fetch zero or more Chapters
+ * const chapters = await prisma.chapter.findMany()
  * ```
  *
  *
@@ -92,8 +102,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Courses
-   * const courses = await prisma.course.findMany()
+   * // Fetch zero or more Chapters
+   * const chapters = await prisma.chapter.findMany()
    * ```
    *
    *
@@ -190,6 +200,16 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.chapter`: Exposes CRUD operations for the **Chapter** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Chapters
+    * const chapters = await prisma.chapter.findMany()
+    * ```
+    */
+  get chapter(): Prisma.ChapterDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.course`: Exposes CRUD operations for the **Course** model.
     * Example usage:
     * ```ts
@@ -198,6 +218,16 @@ export class PrismaClient<
     * ```
     */
   get course(): Prisma.CourseDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userCourseCompletion`: Exposes CRUD operations for the **UserCourseCompletion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserCourseCompletions
+    * const userCourseCompletions = await prisma.userCourseCompletion.findMany()
+    * ```
+    */
+  get userCourseCompletion(): Prisma.UserCourseCompletionDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.sharedCourse`: Exposes CRUD operations for the **SharedCourse** model.
@@ -728,7 +758,9 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    Chapter: 'Chapter',
     Course: 'Course',
+    UserCourseCompletion: 'UserCourseCompletion',
     SharedCourse: 'SharedCourse',
     User: 'User',
     Session: 'Session',
@@ -756,10 +788,76 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "course" | "sharedCourse" | "user" | "session" | "account" | "verification" | "plan" | "subscription" | "file" | "usage"
+      modelProps: "chapter" | "course" | "userCourseCompletion" | "sharedCourse" | "user" | "session" | "account" | "verification" | "plan" | "subscription" | "file" | "usage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      Chapter: {
+        payload: Prisma.$ChapterPayload<ExtArgs>
+        fields: Prisma.ChapterFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ChapterFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ChapterFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload>
+          }
+          findFirst: {
+            args: Prisma.ChapterFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ChapterFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload>
+          }
+          findMany: {
+            args: Prisma.ChapterFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload>[]
+          }
+          create: {
+            args: Prisma.ChapterCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload>
+          }
+          createMany: {
+            args: Prisma.ChapterCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ChapterDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload>
+          }
+          update: {
+            args: Prisma.ChapterUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload>
+          }
+          deleteMany: {
+            args: Prisma.ChapterDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ChapterUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ChapterUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload>
+          }
+          aggregate: {
+            args: Prisma.ChapterAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateChapter>
+          }
+          groupBy: {
+            args: Prisma.ChapterGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ChapterGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ChapterCountArgs<ExtArgs>
+            result: $Utils.Optional<ChapterCountAggregateOutputType> | number
+          }
+        }
+      }
       Course: {
         payload: Prisma.$CoursePayload<ExtArgs>
         fields: Prisma.CourseFieldRefs
@@ -823,6 +921,72 @@ export namespace Prisma {
           count: {
             args: Prisma.CourseCountArgs<ExtArgs>
             result: $Utils.Optional<CourseCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserCourseCompletion: {
+        payload: Prisma.$UserCourseCompletionPayload<ExtArgs>
+        fields: Prisma.UserCourseCompletionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserCourseCompletionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserCourseCompletionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserCourseCompletionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserCourseCompletionPayload>
+          }
+          findFirst: {
+            args: Prisma.UserCourseCompletionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserCourseCompletionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserCourseCompletionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserCourseCompletionPayload>
+          }
+          findMany: {
+            args: Prisma.UserCourseCompletionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserCourseCompletionPayload>[]
+          }
+          create: {
+            args: Prisma.UserCourseCompletionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserCourseCompletionPayload>
+          }
+          createMany: {
+            args: Prisma.UserCourseCompletionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.UserCourseCompletionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserCourseCompletionPayload>
+          }
+          update: {
+            args: Prisma.UserCourseCompletionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserCourseCompletionPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserCourseCompletionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserCourseCompletionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.UserCourseCompletionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserCourseCompletionPayload>
+          }
+          aggregate: {
+            args: Prisma.UserCourseCompletionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserCourseCompletion>
+          }
+          groupBy: {
+            args: Prisma.UserCourseCompletionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserCourseCompletionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserCourseCompletionCountArgs<ExtArgs>
+            result: $Utils.Optional<UserCourseCompletionCountAggregateOutputType> | number
           }
         }
       }
@@ -1504,7 +1668,9 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
+    chapter?: ChapterOmit
     course?: CourseOmit
+    userCourseCompletion?: UserCourseCompletionOmit
     sharedCourse?: SharedCourseOmit
     user?: UserOmit
     session?: SessionOmit
@@ -1608,11 +1774,13 @@ export namespace Prisma {
    */
 
   export type CourseCountOutputType = {
+    chapters: number
     files: number
     sharedWith: number
   }
 
   export type CourseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    chapters?: boolean | CourseCountOutputTypeCountChaptersArgs
     files?: boolean | CourseCountOutputTypeCountFilesArgs
     sharedWith?: boolean | CourseCountOutputTypeCountSharedWithArgs
   }
@@ -1626,6 +1794,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the CourseCountOutputType
      */
     select?: CourseCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CourseCountOutputType without action
+   */
+  export type CourseCountOutputTypeCountChaptersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChapterWhereInput
   }
 
   /**
@@ -1786,6 +1961,931 @@ export namespace Prisma {
    */
 
   /**
+   * Model Chapter
+   */
+
+  export type AggregateChapter = {
+    _count: ChapterCountAggregateOutputType | null
+    _min: ChapterMinAggregateOutputType | null
+    _max: ChapterMaxAggregateOutputType | null
+  }
+
+  export type ChapterMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    duration: string | null
+    courseId: string | null
+  }
+
+  export type ChapterMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    duration: string | null
+    courseId: string | null
+  }
+
+  export type ChapterCountAggregateOutputType = {
+    id: number
+    title: number
+    duration: number
+    content: number
+    courseId: number
+    _all: number
+  }
+
+
+  export type ChapterMinAggregateInputType = {
+    id?: true
+    title?: true
+    duration?: true
+    courseId?: true
+  }
+
+  export type ChapterMaxAggregateInputType = {
+    id?: true
+    title?: true
+    duration?: true
+    courseId?: true
+  }
+
+  export type ChapterCountAggregateInputType = {
+    id?: true
+    title?: true
+    duration?: true
+    content?: true
+    courseId?: true
+    _all?: true
+  }
+
+  export type ChapterAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Chapter to aggregate.
+     */
+    where?: ChapterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Chapters to fetch.
+     */
+    orderBy?: ChapterOrderByWithRelationInput | ChapterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ChapterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Chapters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Chapters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Chapters
+    **/
+    _count?: true | ChapterCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ChapterMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ChapterMaxAggregateInputType
+  }
+
+  export type GetChapterAggregateType<T extends ChapterAggregateArgs> = {
+        [P in keyof T & keyof AggregateChapter]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateChapter[P]>
+      : GetScalarType<T[P], AggregateChapter[P]>
+  }
+
+
+
+
+  export type ChapterGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChapterWhereInput
+    orderBy?: ChapterOrderByWithAggregationInput | ChapterOrderByWithAggregationInput[]
+    by: ChapterScalarFieldEnum[] | ChapterScalarFieldEnum
+    having?: ChapterScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ChapterCountAggregateInputType | true
+    _min?: ChapterMinAggregateInputType
+    _max?: ChapterMaxAggregateInputType
+  }
+
+  export type ChapterGroupByOutputType = {
+    id: string
+    title: string
+    duration: string
+    content: JsonValue
+    courseId: string
+    _count: ChapterCountAggregateOutputType | null
+    _min: ChapterMinAggregateOutputType | null
+    _max: ChapterMaxAggregateOutputType | null
+  }
+
+  type GetChapterGroupByPayload<T extends ChapterGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ChapterGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ChapterGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ChapterGroupByOutputType[P]>
+            : GetScalarType<T[P], ChapterGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ChapterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    duration?: boolean
+    content?: boolean
+    courseId?: boolean
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["chapter"]>
+
+
+
+  export type ChapterSelectScalar = {
+    id?: boolean
+    title?: boolean
+    duration?: boolean
+    content?: boolean
+    courseId?: boolean
+  }
+
+  export type ChapterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "duration" | "content" | "courseId", ExtArgs["result"]["chapter"]>
+  export type ChapterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+  }
+
+  export type $ChapterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Chapter"
+    objects: {
+      course: Prisma.$CoursePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      duration: string
+      content: Prisma.JsonValue
+      courseId: string
+    }, ExtArgs["result"]["chapter"]>
+    composites: {}
+  }
+
+  type ChapterGetPayload<S extends boolean | null | undefined | ChapterDefaultArgs> = $Result.GetResult<Prisma.$ChapterPayload, S>
+
+  type ChapterCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ChapterFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ChapterCountAggregateInputType | true
+    }
+
+  export interface ChapterDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Chapter'], meta: { name: 'Chapter' } }
+    /**
+     * Find zero or one Chapter that matches the filter.
+     * @param {ChapterFindUniqueArgs} args - Arguments to find a Chapter
+     * @example
+     * // Get one Chapter
+     * const chapter = await prisma.chapter.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ChapterFindUniqueArgs>(args: SelectSubset<T, ChapterFindUniqueArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Chapter that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ChapterFindUniqueOrThrowArgs} args - Arguments to find a Chapter
+     * @example
+     * // Get one Chapter
+     * const chapter = await prisma.chapter.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ChapterFindUniqueOrThrowArgs>(args: SelectSubset<T, ChapterFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Chapter that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterFindFirstArgs} args - Arguments to find a Chapter
+     * @example
+     * // Get one Chapter
+     * const chapter = await prisma.chapter.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ChapterFindFirstArgs>(args?: SelectSubset<T, ChapterFindFirstArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Chapter that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterFindFirstOrThrowArgs} args - Arguments to find a Chapter
+     * @example
+     * // Get one Chapter
+     * const chapter = await prisma.chapter.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ChapterFindFirstOrThrowArgs>(args?: SelectSubset<T, ChapterFindFirstOrThrowArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Chapters that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Chapters
+     * const chapters = await prisma.chapter.findMany()
+     * 
+     * // Get first 10 Chapters
+     * const chapters = await prisma.chapter.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const chapterWithIdOnly = await prisma.chapter.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ChapterFindManyArgs>(args?: SelectSubset<T, ChapterFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Chapter.
+     * @param {ChapterCreateArgs} args - Arguments to create a Chapter.
+     * @example
+     * // Create one Chapter
+     * const Chapter = await prisma.chapter.create({
+     *   data: {
+     *     // ... data to create a Chapter
+     *   }
+     * })
+     * 
+     */
+    create<T extends ChapterCreateArgs>(args: SelectSubset<T, ChapterCreateArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Chapters.
+     * @param {ChapterCreateManyArgs} args - Arguments to create many Chapters.
+     * @example
+     * // Create many Chapters
+     * const chapter = await prisma.chapter.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ChapterCreateManyArgs>(args?: SelectSubset<T, ChapterCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Chapter.
+     * @param {ChapterDeleteArgs} args - Arguments to delete one Chapter.
+     * @example
+     * // Delete one Chapter
+     * const Chapter = await prisma.chapter.delete({
+     *   where: {
+     *     // ... filter to delete one Chapter
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ChapterDeleteArgs>(args: SelectSubset<T, ChapterDeleteArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Chapter.
+     * @param {ChapterUpdateArgs} args - Arguments to update one Chapter.
+     * @example
+     * // Update one Chapter
+     * const chapter = await prisma.chapter.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ChapterUpdateArgs>(args: SelectSubset<T, ChapterUpdateArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Chapters.
+     * @param {ChapterDeleteManyArgs} args - Arguments to filter Chapters to delete.
+     * @example
+     * // Delete a few Chapters
+     * const { count } = await prisma.chapter.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ChapterDeleteManyArgs>(args?: SelectSubset<T, ChapterDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Chapters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Chapters
+     * const chapter = await prisma.chapter.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ChapterUpdateManyArgs>(args: SelectSubset<T, ChapterUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Chapter.
+     * @param {ChapterUpsertArgs} args - Arguments to update or create a Chapter.
+     * @example
+     * // Update or create a Chapter
+     * const chapter = await prisma.chapter.upsert({
+     *   create: {
+     *     // ... data to create a Chapter
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Chapter we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ChapterUpsertArgs>(args: SelectSubset<T, ChapterUpsertArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Chapters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterCountArgs} args - Arguments to filter Chapters to count.
+     * @example
+     * // Count the number of Chapters
+     * const count = await prisma.chapter.count({
+     *   where: {
+     *     // ... the filter for the Chapters we want to count
+     *   }
+     * })
+    **/
+    count<T extends ChapterCountArgs>(
+      args?: Subset<T, ChapterCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ChapterCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Chapter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ChapterAggregateArgs>(args: Subset<T, ChapterAggregateArgs>): Prisma.PrismaPromise<GetChapterAggregateType<T>>
+
+    /**
+     * Group by Chapter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ChapterGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ChapterGroupByArgs['orderBy'] }
+        : { orderBy?: ChapterGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ChapterGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetChapterGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Chapter model
+   */
+  readonly fields: ChapterFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Chapter.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ChapterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Chapter model
+   */
+  interface ChapterFieldRefs {
+    readonly id: FieldRef<"Chapter", 'String'>
+    readonly title: FieldRef<"Chapter", 'String'>
+    readonly duration: FieldRef<"Chapter", 'String'>
+    readonly content: FieldRef<"Chapter", 'Json'>
+    readonly courseId: FieldRef<"Chapter", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Chapter findUnique
+   */
+  export type ChapterFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which Chapter to fetch.
+     */
+    where: ChapterWhereUniqueInput
+  }
+
+  /**
+   * Chapter findUniqueOrThrow
+   */
+  export type ChapterFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which Chapter to fetch.
+     */
+    where: ChapterWhereUniqueInput
+  }
+
+  /**
+   * Chapter findFirst
+   */
+  export type ChapterFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which Chapter to fetch.
+     */
+    where?: ChapterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Chapters to fetch.
+     */
+    orderBy?: ChapterOrderByWithRelationInput | ChapterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Chapters.
+     */
+    cursor?: ChapterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Chapters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Chapters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Chapters.
+     */
+    distinct?: ChapterScalarFieldEnum | ChapterScalarFieldEnum[]
+  }
+
+  /**
+   * Chapter findFirstOrThrow
+   */
+  export type ChapterFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which Chapter to fetch.
+     */
+    where?: ChapterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Chapters to fetch.
+     */
+    orderBy?: ChapterOrderByWithRelationInput | ChapterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Chapters.
+     */
+    cursor?: ChapterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Chapters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Chapters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Chapters.
+     */
+    distinct?: ChapterScalarFieldEnum | ChapterScalarFieldEnum[]
+  }
+
+  /**
+   * Chapter findMany
+   */
+  export type ChapterFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which Chapters to fetch.
+     */
+    where?: ChapterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Chapters to fetch.
+     */
+    orderBy?: ChapterOrderByWithRelationInput | ChapterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Chapters.
+     */
+    cursor?: ChapterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Chapters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Chapters.
+     */
+    skip?: number
+    distinct?: ChapterScalarFieldEnum | ChapterScalarFieldEnum[]
+  }
+
+  /**
+   * Chapter create
+   */
+  export type ChapterCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Chapter.
+     */
+    data: XOR<ChapterCreateInput, ChapterUncheckedCreateInput>
+  }
+
+  /**
+   * Chapter createMany
+   */
+  export type ChapterCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Chapters.
+     */
+    data: ChapterCreateManyInput | ChapterCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Chapter update
+   */
+  export type ChapterUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Chapter.
+     */
+    data: XOR<ChapterUpdateInput, ChapterUncheckedUpdateInput>
+    /**
+     * Choose, which Chapter to update.
+     */
+    where: ChapterWhereUniqueInput
+  }
+
+  /**
+   * Chapter updateMany
+   */
+  export type ChapterUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Chapters.
+     */
+    data: XOR<ChapterUpdateManyMutationInput, ChapterUncheckedUpdateManyInput>
+    /**
+     * Filter which Chapters to update
+     */
+    where?: ChapterWhereInput
+    /**
+     * Limit how many Chapters to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Chapter upsert
+   */
+  export type ChapterUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Chapter to update in case it exists.
+     */
+    where: ChapterWhereUniqueInput
+    /**
+     * In case the Chapter found by the `where` argument doesn't exist, create a new Chapter with this data.
+     */
+    create: XOR<ChapterCreateInput, ChapterUncheckedCreateInput>
+    /**
+     * In case the Chapter was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ChapterUpdateInput, ChapterUncheckedUpdateInput>
+  }
+
+  /**
+   * Chapter delete
+   */
+  export type ChapterDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * Filter which Chapter to delete.
+     */
+    where: ChapterWhereUniqueInput
+  }
+
+  /**
+   * Chapter deleteMany
+   */
+  export type ChapterDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Chapters to delete
+     */
+    where?: ChapterWhereInput
+    /**
+     * Limit how many Chapters to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Chapter without action
+   */
+  export type ChapterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Course
    */
 
@@ -1817,7 +2917,6 @@ export namespace Prisma {
     id: number
     title: number
     description: number
-    content: number
     createdAt: number
     updatedAt: number
     authorId: number
@@ -1847,7 +2946,6 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
-    content?: true
     createdAt?: true
     updatedAt?: true
     authorId?: true
@@ -1930,7 +3028,6 @@ export namespace Prisma {
     id: string
     title: string
     description: string
-    content: JsonValue
     createdAt: Date
     updatedAt: Date
     authorId: string
@@ -1957,10 +3054,10 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
-    content?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     authorId?: boolean
+    chapters?: boolean | Course$chaptersArgs<ExtArgs>
     author?: boolean | UserDefaultArgs<ExtArgs>
     files?: boolean | Course$filesArgs<ExtArgs>
     sharedWith?: boolean | Course$sharedWithArgs<ExtArgs>
@@ -1973,14 +3070,14 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
-    content?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     authorId?: boolean
   }
 
-  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "content" | "createdAt" | "updatedAt" | "authorId", ExtArgs["result"]["course"]>
+  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "createdAt" | "updatedAt" | "authorId", ExtArgs["result"]["course"]>
   export type CourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    chapters?: boolean | Course$chaptersArgs<ExtArgs>
     author?: boolean | UserDefaultArgs<ExtArgs>
     files?: boolean | Course$filesArgs<ExtArgs>
     sharedWith?: boolean | Course$sharedWithArgs<ExtArgs>
@@ -1990,6 +3087,7 @@ export namespace Prisma {
   export type $CoursePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Course"
     objects: {
+      chapters: Prisma.$ChapterPayload<ExtArgs>[]
       author: Prisma.$UserPayload<ExtArgs>
       files: Prisma.$FilePayload<ExtArgs>[]
       sharedWith: Prisma.$SharedCoursePayload<ExtArgs>[]
@@ -1998,7 +3096,6 @@ export namespace Prisma {
       id: string
       title: string
       description: string
-      content: Prisma.JsonValue
       createdAt: Date
       updatedAt: Date
       authorId: string
@@ -2342,6 +3439,7 @@ export namespace Prisma {
    */
   export interface Prisma__CourseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    chapters<T extends Course$chaptersArgs<ExtArgs> = {}>(args?: Subset<T, Course$chaptersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     files<T extends Course$filesArgs<ExtArgs> = {}>(args?: Subset<T, Course$filesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sharedWith<T extends Course$sharedWithArgs<ExtArgs> = {}>(args?: Subset<T, Course$sharedWithArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SharedCoursePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2377,7 +3475,6 @@ export namespace Prisma {
     readonly id: FieldRef<"Course", 'String'>
     readonly title: FieldRef<"Course", 'String'>
     readonly description: FieldRef<"Course", 'String'>
-    readonly content: FieldRef<"Course", 'Json'>
     readonly createdAt: FieldRef<"Course", 'DateTime'>
     readonly updatedAt: FieldRef<"Course", 'DateTime'>
     readonly authorId: FieldRef<"Course", 'String'>
@@ -2724,6 +3821,30 @@ export namespace Prisma {
   }
 
   /**
+   * Course.chapters
+   */
+  export type Course$chaptersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    where?: ChapterWhereInput
+    orderBy?: ChapterOrderByWithRelationInput | ChapterOrderByWithRelationInput[]
+    cursor?: ChapterWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChapterScalarFieldEnum | ChapterScalarFieldEnum[]
+  }
+
+  /**
    * Course.files
    */
   export type Course$filesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2787,6 +3908,866 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: CourseInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserCourseCompletion
+   */
+
+  export type AggregateUserCourseCompletion = {
+    _count: UserCourseCompletionCountAggregateOutputType | null
+    _min: UserCourseCompletionMinAggregateOutputType | null
+    _max: UserCourseCompletionMaxAggregateOutputType | null
+  }
+
+  export type UserCourseCompletionMinAggregateOutputType = {
+    userId: string | null
+    chapterId: string | null
+    completed: boolean | null
+  }
+
+  export type UserCourseCompletionMaxAggregateOutputType = {
+    userId: string | null
+    chapterId: string | null
+    completed: boolean | null
+  }
+
+  export type UserCourseCompletionCountAggregateOutputType = {
+    userId: number
+    chapterId: number
+    completed: number
+    _all: number
+  }
+
+
+  export type UserCourseCompletionMinAggregateInputType = {
+    userId?: true
+    chapterId?: true
+    completed?: true
+  }
+
+  export type UserCourseCompletionMaxAggregateInputType = {
+    userId?: true
+    chapterId?: true
+    completed?: true
+  }
+
+  export type UserCourseCompletionCountAggregateInputType = {
+    userId?: true
+    chapterId?: true
+    completed?: true
+    _all?: true
+  }
+
+  export type UserCourseCompletionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserCourseCompletion to aggregate.
+     */
+    where?: UserCourseCompletionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserCourseCompletions to fetch.
+     */
+    orderBy?: UserCourseCompletionOrderByWithRelationInput | UserCourseCompletionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserCourseCompletionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserCourseCompletions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserCourseCompletions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserCourseCompletions
+    **/
+    _count?: true | UserCourseCompletionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserCourseCompletionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserCourseCompletionMaxAggregateInputType
+  }
+
+  export type GetUserCourseCompletionAggregateType<T extends UserCourseCompletionAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserCourseCompletion]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserCourseCompletion[P]>
+      : GetScalarType<T[P], AggregateUserCourseCompletion[P]>
+  }
+
+
+
+
+  export type UserCourseCompletionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserCourseCompletionWhereInput
+    orderBy?: UserCourseCompletionOrderByWithAggregationInput | UserCourseCompletionOrderByWithAggregationInput[]
+    by: UserCourseCompletionScalarFieldEnum[] | UserCourseCompletionScalarFieldEnum
+    having?: UserCourseCompletionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserCourseCompletionCountAggregateInputType | true
+    _min?: UserCourseCompletionMinAggregateInputType
+    _max?: UserCourseCompletionMaxAggregateInputType
+  }
+
+  export type UserCourseCompletionGroupByOutputType = {
+    userId: string
+    chapterId: string
+    completed: boolean
+    _count: UserCourseCompletionCountAggregateOutputType | null
+    _min: UserCourseCompletionMinAggregateOutputType | null
+    _max: UserCourseCompletionMaxAggregateOutputType | null
+  }
+
+  type GetUserCourseCompletionGroupByPayload<T extends UserCourseCompletionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserCourseCompletionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserCourseCompletionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserCourseCompletionGroupByOutputType[P]>
+            : GetScalarType<T[P], UserCourseCompletionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserCourseCompletionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    userId?: boolean
+    chapterId?: boolean
+    completed?: boolean
+  }, ExtArgs["result"]["userCourseCompletion"]>
+
+
+
+  export type UserCourseCompletionSelectScalar = {
+    userId?: boolean
+    chapterId?: boolean
+    completed?: boolean
+  }
+
+  export type UserCourseCompletionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "chapterId" | "completed", ExtArgs["result"]["userCourseCompletion"]>
+
+  export type $UserCourseCompletionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserCourseCompletion"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      userId: string
+      chapterId: string
+      completed: boolean
+    }, ExtArgs["result"]["userCourseCompletion"]>
+    composites: {}
+  }
+
+  type UserCourseCompletionGetPayload<S extends boolean | null | undefined | UserCourseCompletionDefaultArgs> = $Result.GetResult<Prisma.$UserCourseCompletionPayload, S>
+
+  type UserCourseCompletionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserCourseCompletionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserCourseCompletionCountAggregateInputType | true
+    }
+
+  export interface UserCourseCompletionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserCourseCompletion'], meta: { name: 'UserCourseCompletion' } }
+    /**
+     * Find zero or one UserCourseCompletion that matches the filter.
+     * @param {UserCourseCompletionFindUniqueArgs} args - Arguments to find a UserCourseCompletion
+     * @example
+     * // Get one UserCourseCompletion
+     * const userCourseCompletion = await prisma.userCourseCompletion.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserCourseCompletionFindUniqueArgs>(args: SelectSubset<T, UserCourseCompletionFindUniqueArgs<ExtArgs>>): Prisma__UserCourseCompletionClient<$Result.GetResult<Prisma.$UserCourseCompletionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserCourseCompletion that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserCourseCompletionFindUniqueOrThrowArgs} args - Arguments to find a UserCourseCompletion
+     * @example
+     * // Get one UserCourseCompletion
+     * const userCourseCompletion = await prisma.userCourseCompletion.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserCourseCompletionFindUniqueOrThrowArgs>(args: SelectSubset<T, UserCourseCompletionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserCourseCompletionClient<$Result.GetResult<Prisma.$UserCourseCompletionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserCourseCompletion that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserCourseCompletionFindFirstArgs} args - Arguments to find a UserCourseCompletion
+     * @example
+     * // Get one UserCourseCompletion
+     * const userCourseCompletion = await prisma.userCourseCompletion.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserCourseCompletionFindFirstArgs>(args?: SelectSubset<T, UserCourseCompletionFindFirstArgs<ExtArgs>>): Prisma__UserCourseCompletionClient<$Result.GetResult<Prisma.$UserCourseCompletionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserCourseCompletion that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserCourseCompletionFindFirstOrThrowArgs} args - Arguments to find a UserCourseCompletion
+     * @example
+     * // Get one UserCourseCompletion
+     * const userCourseCompletion = await prisma.userCourseCompletion.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserCourseCompletionFindFirstOrThrowArgs>(args?: SelectSubset<T, UserCourseCompletionFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserCourseCompletionClient<$Result.GetResult<Prisma.$UserCourseCompletionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserCourseCompletions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserCourseCompletionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserCourseCompletions
+     * const userCourseCompletions = await prisma.userCourseCompletion.findMany()
+     * 
+     * // Get first 10 UserCourseCompletions
+     * const userCourseCompletions = await prisma.userCourseCompletion.findMany({ take: 10 })
+     * 
+     * // Only select the `userId`
+     * const userCourseCompletionWithUserIdOnly = await prisma.userCourseCompletion.findMany({ select: { userId: true } })
+     * 
+     */
+    findMany<T extends UserCourseCompletionFindManyArgs>(args?: SelectSubset<T, UserCourseCompletionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserCourseCompletionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserCourseCompletion.
+     * @param {UserCourseCompletionCreateArgs} args - Arguments to create a UserCourseCompletion.
+     * @example
+     * // Create one UserCourseCompletion
+     * const UserCourseCompletion = await prisma.userCourseCompletion.create({
+     *   data: {
+     *     // ... data to create a UserCourseCompletion
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserCourseCompletionCreateArgs>(args: SelectSubset<T, UserCourseCompletionCreateArgs<ExtArgs>>): Prisma__UserCourseCompletionClient<$Result.GetResult<Prisma.$UserCourseCompletionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserCourseCompletions.
+     * @param {UserCourseCompletionCreateManyArgs} args - Arguments to create many UserCourseCompletions.
+     * @example
+     * // Create many UserCourseCompletions
+     * const userCourseCompletion = await prisma.userCourseCompletion.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserCourseCompletionCreateManyArgs>(args?: SelectSubset<T, UserCourseCompletionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a UserCourseCompletion.
+     * @param {UserCourseCompletionDeleteArgs} args - Arguments to delete one UserCourseCompletion.
+     * @example
+     * // Delete one UserCourseCompletion
+     * const UserCourseCompletion = await prisma.userCourseCompletion.delete({
+     *   where: {
+     *     // ... filter to delete one UserCourseCompletion
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserCourseCompletionDeleteArgs>(args: SelectSubset<T, UserCourseCompletionDeleteArgs<ExtArgs>>): Prisma__UserCourseCompletionClient<$Result.GetResult<Prisma.$UserCourseCompletionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserCourseCompletion.
+     * @param {UserCourseCompletionUpdateArgs} args - Arguments to update one UserCourseCompletion.
+     * @example
+     * // Update one UserCourseCompletion
+     * const userCourseCompletion = await prisma.userCourseCompletion.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserCourseCompletionUpdateArgs>(args: SelectSubset<T, UserCourseCompletionUpdateArgs<ExtArgs>>): Prisma__UserCourseCompletionClient<$Result.GetResult<Prisma.$UserCourseCompletionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserCourseCompletions.
+     * @param {UserCourseCompletionDeleteManyArgs} args - Arguments to filter UserCourseCompletions to delete.
+     * @example
+     * // Delete a few UserCourseCompletions
+     * const { count } = await prisma.userCourseCompletion.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserCourseCompletionDeleteManyArgs>(args?: SelectSubset<T, UserCourseCompletionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserCourseCompletions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserCourseCompletionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserCourseCompletions
+     * const userCourseCompletion = await prisma.userCourseCompletion.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserCourseCompletionUpdateManyArgs>(args: SelectSubset<T, UserCourseCompletionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one UserCourseCompletion.
+     * @param {UserCourseCompletionUpsertArgs} args - Arguments to update or create a UserCourseCompletion.
+     * @example
+     * // Update or create a UserCourseCompletion
+     * const userCourseCompletion = await prisma.userCourseCompletion.upsert({
+     *   create: {
+     *     // ... data to create a UserCourseCompletion
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserCourseCompletion we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserCourseCompletionUpsertArgs>(args: SelectSubset<T, UserCourseCompletionUpsertArgs<ExtArgs>>): Prisma__UserCourseCompletionClient<$Result.GetResult<Prisma.$UserCourseCompletionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserCourseCompletions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserCourseCompletionCountArgs} args - Arguments to filter UserCourseCompletions to count.
+     * @example
+     * // Count the number of UserCourseCompletions
+     * const count = await prisma.userCourseCompletion.count({
+     *   where: {
+     *     // ... the filter for the UserCourseCompletions we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserCourseCompletionCountArgs>(
+      args?: Subset<T, UserCourseCompletionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserCourseCompletionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserCourseCompletion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserCourseCompletionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserCourseCompletionAggregateArgs>(args: Subset<T, UserCourseCompletionAggregateArgs>): Prisma.PrismaPromise<GetUserCourseCompletionAggregateType<T>>
+
+    /**
+     * Group by UserCourseCompletion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserCourseCompletionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserCourseCompletionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserCourseCompletionGroupByArgs['orderBy'] }
+        : { orderBy?: UserCourseCompletionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserCourseCompletionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserCourseCompletionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserCourseCompletion model
+   */
+  readonly fields: UserCourseCompletionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserCourseCompletion.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserCourseCompletionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserCourseCompletion model
+   */
+  interface UserCourseCompletionFieldRefs {
+    readonly userId: FieldRef<"UserCourseCompletion", 'String'>
+    readonly chapterId: FieldRef<"UserCourseCompletion", 'String'>
+    readonly completed: FieldRef<"UserCourseCompletion", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserCourseCompletion findUnique
+   */
+  export type UserCourseCompletionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCourseCompletion
+     */
+    select?: UserCourseCompletionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserCourseCompletion
+     */
+    omit?: UserCourseCompletionOmit<ExtArgs> | null
+    /**
+     * Filter, which UserCourseCompletion to fetch.
+     */
+    where: UserCourseCompletionWhereUniqueInput
+  }
+
+  /**
+   * UserCourseCompletion findUniqueOrThrow
+   */
+  export type UserCourseCompletionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCourseCompletion
+     */
+    select?: UserCourseCompletionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserCourseCompletion
+     */
+    omit?: UserCourseCompletionOmit<ExtArgs> | null
+    /**
+     * Filter, which UserCourseCompletion to fetch.
+     */
+    where: UserCourseCompletionWhereUniqueInput
+  }
+
+  /**
+   * UserCourseCompletion findFirst
+   */
+  export type UserCourseCompletionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCourseCompletion
+     */
+    select?: UserCourseCompletionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserCourseCompletion
+     */
+    omit?: UserCourseCompletionOmit<ExtArgs> | null
+    /**
+     * Filter, which UserCourseCompletion to fetch.
+     */
+    where?: UserCourseCompletionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserCourseCompletions to fetch.
+     */
+    orderBy?: UserCourseCompletionOrderByWithRelationInput | UserCourseCompletionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserCourseCompletions.
+     */
+    cursor?: UserCourseCompletionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserCourseCompletions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserCourseCompletions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserCourseCompletions.
+     */
+    distinct?: UserCourseCompletionScalarFieldEnum | UserCourseCompletionScalarFieldEnum[]
+  }
+
+  /**
+   * UserCourseCompletion findFirstOrThrow
+   */
+  export type UserCourseCompletionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCourseCompletion
+     */
+    select?: UserCourseCompletionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserCourseCompletion
+     */
+    omit?: UserCourseCompletionOmit<ExtArgs> | null
+    /**
+     * Filter, which UserCourseCompletion to fetch.
+     */
+    where?: UserCourseCompletionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserCourseCompletions to fetch.
+     */
+    orderBy?: UserCourseCompletionOrderByWithRelationInput | UserCourseCompletionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserCourseCompletions.
+     */
+    cursor?: UserCourseCompletionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserCourseCompletions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserCourseCompletions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserCourseCompletions.
+     */
+    distinct?: UserCourseCompletionScalarFieldEnum | UserCourseCompletionScalarFieldEnum[]
+  }
+
+  /**
+   * UserCourseCompletion findMany
+   */
+  export type UserCourseCompletionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCourseCompletion
+     */
+    select?: UserCourseCompletionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserCourseCompletion
+     */
+    omit?: UserCourseCompletionOmit<ExtArgs> | null
+    /**
+     * Filter, which UserCourseCompletions to fetch.
+     */
+    where?: UserCourseCompletionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserCourseCompletions to fetch.
+     */
+    orderBy?: UserCourseCompletionOrderByWithRelationInput | UserCourseCompletionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserCourseCompletions.
+     */
+    cursor?: UserCourseCompletionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserCourseCompletions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserCourseCompletions.
+     */
+    skip?: number
+    distinct?: UserCourseCompletionScalarFieldEnum | UserCourseCompletionScalarFieldEnum[]
+  }
+
+  /**
+   * UserCourseCompletion create
+   */
+  export type UserCourseCompletionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCourseCompletion
+     */
+    select?: UserCourseCompletionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserCourseCompletion
+     */
+    omit?: UserCourseCompletionOmit<ExtArgs> | null
+    /**
+     * The data needed to create a UserCourseCompletion.
+     */
+    data: XOR<UserCourseCompletionCreateInput, UserCourseCompletionUncheckedCreateInput>
+  }
+
+  /**
+   * UserCourseCompletion createMany
+   */
+  export type UserCourseCompletionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserCourseCompletions.
+     */
+    data: UserCourseCompletionCreateManyInput | UserCourseCompletionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserCourseCompletion update
+   */
+  export type UserCourseCompletionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCourseCompletion
+     */
+    select?: UserCourseCompletionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserCourseCompletion
+     */
+    omit?: UserCourseCompletionOmit<ExtArgs> | null
+    /**
+     * The data needed to update a UserCourseCompletion.
+     */
+    data: XOR<UserCourseCompletionUpdateInput, UserCourseCompletionUncheckedUpdateInput>
+    /**
+     * Choose, which UserCourseCompletion to update.
+     */
+    where: UserCourseCompletionWhereUniqueInput
+  }
+
+  /**
+   * UserCourseCompletion updateMany
+   */
+  export type UserCourseCompletionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserCourseCompletions.
+     */
+    data: XOR<UserCourseCompletionUpdateManyMutationInput, UserCourseCompletionUncheckedUpdateManyInput>
+    /**
+     * Filter which UserCourseCompletions to update
+     */
+    where?: UserCourseCompletionWhereInput
+    /**
+     * Limit how many UserCourseCompletions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserCourseCompletion upsert
+   */
+  export type UserCourseCompletionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCourseCompletion
+     */
+    select?: UserCourseCompletionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserCourseCompletion
+     */
+    omit?: UserCourseCompletionOmit<ExtArgs> | null
+    /**
+     * The filter to search for the UserCourseCompletion to update in case it exists.
+     */
+    where: UserCourseCompletionWhereUniqueInput
+    /**
+     * In case the UserCourseCompletion found by the `where` argument doesn't exist, create a new UserCourseCompletion with this data.
+     */
+    create: XOR<UserCourseCompletionCreateInput, UserCourseCompletionUncheckedCreateInput>
+    /**
+     * In case the UserCourseCompletion was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserCourseCompletionUpdateInput, UserCourseCompletionUncheckedUpdateInput>
+  }
+
+  /**
+   * UserCourseCompletion delete
+   */
+  export type UserCourseCompletionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCourseCompletion
+     */
+    select?: UserCourseCompletionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserCourseCompletion
+     */
+    omit?: UserCourseCompletionOmit<ExtArgs> | null
+    /**
+     * Filter which UserCourseCompletion to delete.
+     */
+    where: UserCourseCompletionWhereUniqueInput
+  }
+
+  /**
+   * UserCourseCompletion deleteMany
+   */
+  export type UserCourseCompletionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserCourseCompletions to delete
+     */
+    where?: UserCourseCompletionWhereInput
+    /**
+     * Limit how many UserCourseCompletions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserCourseCompletion without action
+   */
+  export type UserCourseCompletionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCourseCompletion
+     */
+    select?: UserCourseCompletionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserCourseCompletion
+     */
+    omit?: UserCourseCompletionOmit<ExtArgs> | null
   }
 
 
@@ -11686,17 +13667,36 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const ChapterScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    duration: 'duration',
+    content: 'content',
+    courseId: 'courseId'
+  };
+
+  export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
+
+
   export const CourseScalarFieldEnum: {
     id: 'id',
     title: 'title',
     description: 'description',
-    content: 'content',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     authorId: 'authorId'
   };
 
   export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
+
+
+  export const UserCourseCompletionScalarFieldEnum: {
+    userId: 'userId',
+    chapterId: 'chapterId',
+    completed: 'completed'
+  };
+
+  export type UserCourseCompletionScalarFieldEnum = (typeof UserCourseCompletionScalarFieldEnum)[keyof typeof UserCourseCompletionScalarFieldEnum]
 
 
   export const SharedCourseScalarFieldEnum: {
@@ -11849,6 +13849,16 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const ChapterOrderByRelevanceFieldEnum: {
+    id: 'id',
+    title: 'title',
+    duration: 'duration',
+    courseId: 'courseId'
+  };
+
+  export type ChapterOrderByRelevanceFieldEnum = (typeof ChapterOrderByRelevanceFieldEnum)[keyof typeof ChapterOrderByRelevanceFieldEnum]
+
+
   export const CourseOrderByRelevanceFieldEnum: {
     id: 'id',
     title: 'title',
@@ -11857,6 +13867,14 @@ export namespace Prisma {
   };
 
   export type CourseOrderByRelevanceFieldEnum = (typeof CourseOrderByRelevanceFieldEnum)[keyof typeof CourseOrderByRelevanceFieldEnum]
+
+
+  export const UserCourseCompletionOrderByRelevanceFieldEnum: {
+    userId: 'userId',
+    chapterId: 'chapterId'
+  };
+
+  export type UserCourseCompletionOrderByRelevanceFieldEnum = (typeof UserCourseCompletionOrderByRelevanceFieldEnum)[keyof typeof UserCourseCompletionOrderByRelevanceFieldEnum]
 
 
   export const SharedCourseOrderByRelevanceFieldEnum: {
@@ -12016,6 +14034,62 @@ export namespace Prisma {
    */
 
 
+  export type ChapterWhereInput = {
+    AND?: ChapterWhereInput | ChapterWhereInput[]
+    OR?: ChapterWhereInput[]
+    NOT?: ChapterWhereInput | ChapterWhereInput[]
+    id?: StringFilter<"Chapter"> | string
+    title?: StringFilter<"Chapter"> | string
+    duration?: StringFilter<"Chapter"> | string
+    content?: JsonFilter<"Chapter">
+    courseId?: StringFilter<"Chapter"> | string
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+  }
+
+  export type ChapterOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    duration?: SortOrder
+    content?: SortOrder
+    courseId?: SortOrder
+    course?: CourseOrderByWithRelationInput
+    _relevance?: ChapterOrderByRelevanceInput
+  }
+
+  export type ChapterWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ChapterWhereInput | ChapterWhereInput[]
+    OR?: ChapterWhereInput[]
+    NOT?: ChapterWhereInput | ChapterWhereInput[]
+    title?: StringFilter<"Chapter"> | string
+    duration?: StringFilter<"Chapter"> | string
+    content?: JsonFilter<"Chapter">
+    courseId?: StringFilter<"Chapter"> | string
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+  }, "id">
+
+  export type ChapterOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    duration?: SortOrder
+    content?: SortOrder
+    courseId?: SortOrder
+    _count?: ChapterCountOrderByAggregateInput
+    _max?: ChapterMaxOrderByAggregateInput
+    _min?: ChapterMinOrderByAggregateInput
+  }
+
+  export type ChapterScalarWhereWithAggregatesInput = {
+    AND?: ChapterScalarWhereWithAggregatesInput | ChapterScalarWhereWithAggregatesInput[]
+    OR?: ChapterScalarWhereWithAggregatesInput[]
+    NOT?: ChapterScalarWhereWithAggregatesInput | ChapterScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Chapter"> | string
+    title?: StringWithAggregatesFilter<"Chapter"> | string
+    duration?: StringWithAggregatesFilter<"Chapter"> | string
+    content?: JsonWithAggregatesFilter<"Chapter">
+    courseId?: StringWithAggregatesFilter<"Chapter"> | string
+  }
+
   export type CourseWhereInput = {
     AND?: CourseWhereInput | CourseWhereInput[]
     OR?: CourseWhereInput[]
@@ -12023,10 +14097,10 @@ export namespace Prisma {
     id?: StringFilter<"Course"> | string
     title?: StringFilter<"Course"> | string
     description?: StringFilter<"Course"> | string
-    content?: JsonFilter<"Course">
     createdAt?: DateTimeFilter<"Course"> | Date | string
     updatedAt?: DateTimeFilter<"Course"> | Date | string
     authorId?: StringFilter<"Course"> | string
+    chapters?: ChapterListRelationFilter
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     files?: FileListRelationFilter
     sharedWith?: SharedCourseListRelationFilter
@@ -12036,10 +14110,10 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    content?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     authorId?: SortOrder
+    chapters?: ChapterOrderByRelationAggregateInput
     author?: UserOrderByWithRelationInput
     files?: FileOrderByRelationAggregateInput
     sharedWith?: SharedCourseOrderByRelationAggregateInput
@@ -12053,10 +14127,10 @@ export namespace Prisma {
     NOT?: CourseWhereInput | CourseWhereInput[]
     title?: StringFilter<"Course"> | string
     description?: StringFilter<"Course"> | string
-    content?: JsonFilter<"Course">
     createdAt?: DateTimeFilter<"Course"> | Date | string
     updatedAt?: DateTimeFilter<"Course"> | Date | string
     authorId?: StringFilter<"Course"> | string
+    chapters?: ChapterListRelationFilter
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     files?: FileListRelationFilter
     sharedWith?: SharedCourseListRelationFilter
@@ -12066,7 +14140,6 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    content?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     authorId?: SortOrder
@@ -12082,10 +14155,53 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Course"> | string
     title?: StringWithAggregatesFilter<"Course"> | string
     description?: StringWithAggregatesFilter<"Course"> | string
-    content?: JsonWithAggregatesFilter<"Course">
     createdAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Course"> | Date | string
     authorId?: StringWithAggregatesFilter<"Course"> | string
+  }
+
+  export type UserCourseCompletionWhereInput = {
+    AND?: UserCourseCompletionWhereInput | UserCourseCompletionWhereInput[]
+    OR?: UserCourseCompletionWhereInput[]
+    NOT?: UserCourseCompletionWhereInput | UserCourseCompletionWhereInput[]
+    userId?: StringFilter<"UserCourseCompletion"> | string
+    chapterId?: StringFilter<"UserCourseCompletion"> | string
+    completed?: BoolFilter<"UserCourseCompletion"> | boolean
+  }
+
+  export type UserCourseCompletionOrderByWithRelationInput = {
+    userId?: SortOrder
+    chapterId?: SortOrder
+    completed?: SortOrder
+    _relevance?: UserCourseCompletionOrderByRelevanceInput
+  }
+
+  export type UserCourseCompletionWhereUniqueInput = Prisma.AtLeast<{
+    userId_chapterId?: UserCourseCompletionUserIdChapterIdCompoundUniqueInput
+    AND?: UserCourseCompletionWhereInput | UserCourseCompletionWhereInput[]
+    OR?: UserCourseCompletionWhereInput[]
+    NOT?: UserCourseCompletionWhereInput | UserCourseCompletionWhereInput[]
+    userId?: StringFilter<"UserCourseCompletion"> | string
+    chapterId?: StringFilter<"UserCourseCompletion"> | string
+    completed?: BoolFilter<"UserCourseCompletion"> | boolean
+  }, "userId_chapterId">
+
+  export type UserCourseCompletionOrderByWithAggregationInput = {
+    userId?: SortOrder
+    chapterId?: SortOrder
+    completed?: SortOrder
+    _count?: UserCourseCompletionCountOrderByAggregateInput
+    _max?: UserCourseCompletionMaxOrderByAggregateInput
+    _min?: UserCourseCompletionMinOrderByAggregateInput
+  }
+
+  export type UserCourseCompletionScalarWhereWithAggregatesInput = {
+    AND?: UserCourseCompletionScalarWhereWithAggregatesInput | UserCourseCompletionScalarWhereWithAggregatesInput[]
+    OR?: UserCourseCompletionScalarWhereWithAggregatesInput[]
+    NOT?: UserCourseCompletionScalarWhereWithAggregatesInput | UserCourseCompletionScalarWhereWithAggregatesInput[]
+    userId?: StringWithAggregatesFilter<"UserCourseCompletion"> | string
+    chapterId?: StringWithAggregatesFilter<"UserCourseCompletion"> | string
+    completed?: BoolWithAggregatesFilter<"UserCourseCompletion"> | boolean
   }
 
   export type SharedCourseWhereInput = {
@@ -12718,13 +14834,68 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Usage"> | Date | string
   }
 
+  export type ChapterCreateInput = {
+    id?: string
+    title: string
+    duration: string
+    content: JsonNullValueInput | InputJsonValue
+    course: CourseCreateNestedOneWithoutChaptersInput
+  }
+
+  export type ChapterUncheckedCreateInput = {
+    id?: string
+    title: string
+    duration: string
+    content: JsonNullValueInput | InputJsonValue
+    courseId: string
+  }
+
+  export type ChapterUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
+    course?: CourseUpdateOneRequiredWithoutChaptersNestedInput
+  }
+
+  export type ChapterUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
+    courseId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ChapterCreateManyInput = {
+    id?: string
+    title: string
+    duration: string
+    content: JsonNullValueInput | InputJsonValue
+    courseId: string
+  }
+
+  export type ChapterUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type ChapterUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
+    courseId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type CourseCreateInput = {
     id?: string
     title: string
     description: string
-    content: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    chapters?: ChapterCreateNestedManyWithoutCourseInput
     author: UserCreateNestedOneWithoutCoursesInput
     files?: FileCreateNestedManyWithoutCoursesInput
     sharedWith?: SharedCourseCreateNestedManyWithoutCourseInput
@@ -12734,10 +14905,10 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
-    content: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: string
+    chapters?: ChapterUncheckedCreateNestedManyWithoutCourseInput
     files?: FileUncheckedCreateNestedManyWithoutCoursesInput
     sharedWith?: SharedCourseUncheckedCreateNestedManyWithoutCourseInput
   }
@@ -12746,9 +14917,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chapters?: ChapterUpdateManyWithoutCourseNestedInput
     author?: UserUpdateOneRequiredWithoutCoursesNestedInput
     files?: FileUpdateManyWithoutCoursesNestedInput
     sharedWith?: SharedCourseUpdateManyWithoutCourseNestedInput
@@ -12758,10 +14929,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
+    chapters?: ChapterUncheckedUpdateManyWithoutCourseNestedInput
     files?: FileUncheckedUpdateManyWithoutCoursesNestedInput
     sharedWith?: SharedCourseUncheckedUpdateManyWithoutCourseNestedInput
   }
@@ -12770,7 +14941,6 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
-    content: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: string
@@ -12780,7 +14950,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12789,10 +14958,51 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserCourseCompletionCreateInput = {
+    userId: string
+    chapterId: string
+    completed: boolean
+  }
+
+  export type UserCourseCompletionUncheckedCreateInput = {
+    userId: string
+    chapterId: string
+    completed: boolean
+  }
+
+  export type UserCourseCompletionUpdateInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    chapterId?: StringFieldUpdateOperationsInput | string
+    completed?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type UserCourseCompletionUncheckedUpdateInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    chapterId?: StringFieldUpdateOperationsInput | string
+    completed?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type UserCourseCompletionCreateManyInput = {
+    userId: string
+    chapterId: string
+    completed: boolean
+  }
+
+  export type UserCourseCompletionUpdateManyMutationInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    chapterId?: StringFieldUpdateOperationsInput | string
+    completed?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type UserCourseCompletionUncheckedUpdateManyInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    chapterId?: StringFieldUpdateOperationsInput | string
+    completed?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type SharedCourseCreateInput = {
@@ -13498,74 +15708,37 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  export type CourseScalarRelationFilter = {
+    is?: CourseWhereInput
+    isNot?: CourseWhereInput
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
-
-  export type FileListRelationFilter = {
-    every?: FileWhereInput
-    some?: FileWhereInput
-    none?: FileWhereInput
-  }
-
-  export type SharedCourseListRelationFilter = {
-    every?: SharedCourseWhereInput
-    some?: SharedCourseWhereInput
-    none?: SharedCourseWhereInput
-  }
-
-  export type FileOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type SharedCourseOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type CourseOrderByRelevanceInput = {
-    fields: CourseOrderByRelevanceFieldEnum | CourseOrderByRelevanceFieldEnum[]
+  export type ChapterOrderByRelevanceInput = {
+    fields: ChapterOrderByRelevanceFieldEnum | ChapterOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
   }
 
-  export type CourseCountOrderByAggregateInput = {
+  export type ChapterCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
-    description?: SortOrder
+    duration?: SortOrder
     content?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    authorId?: SortOrder
+    courseId?: SortOrder
   }
 
-  export type CourseMaxOrderByAggregateInput = {
+  export type ChapterMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
-    description?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    authorId?: SortOrder
+    duration?: SortOrder
+    courseId?: SortOrder
   }
 
-  export type CourseMinOrderByAggregateInput = {
+  export type ChapterMinOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
-    description?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    authorId?: SortOrder
+    duration?: SortOrder
+    courseId?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -13612,6 +15785,85 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type ChapterListRelationFilter = {
+    every?: ChapterWhereInput
+    some?: ChapterWhereInput
+    none?: ChapterWhereInput
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type FileListRelationFilter = {
+    every?: FileWhereInput
+    some?: FileWhereInput
+    none?: FileWhereInput
+  }
+
+  export type SharedCourseListRelationFilter = {
+    every?: SharedCourseWhereInput
+    some?: SharedCourseWhereInput
+    none?: SharedCourseWhereInput
+  }
+
+  export type ChapterOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FileOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SharedCourseOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CourseOrderByRelevanceInput = {
+    fields: CourseOrderByRelevanceFieldEnum | CourseOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type CourseCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    authorId?: SortOrder
+  }
+
+  export type CourseMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    authorId?: SortOrder
+  }
+
+  export type CourseMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    authorId?: SortOrder
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -13626,9 +15878,46 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type CourseScalarRelationFilter = {
-    is?: CourseWhereInput
-    isNot?: CourseWhereInput
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type UserCourseCompletionOrderByRelevanceInput = {
+    fields: UserCourseCompletionOrderByRelevanceFieldEnum | UserCourseCompletionOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type UserCourseCompletionUserIdChapterIdCompoundUniqueInput = {
+    userId: string
+    chapterId: string
+  }
+
+  export type UserCourseCompletionCountOrderByAggregateInput = {
+    userId?: SortOrder
+    chapterId?: SortOrder
+    completed?: SortOrder
+  }
+
+  export type UserCourseCompletionMaxOrderByAggregateInput = {
+    userId?: SortOrder
+    chapterId?: SortOrder
+    completed?: SortOrder
+  }
+
+  export type UserCourseCompletionMinOrderByAggregateInput = {
+    userId?: SortOrder
+    chapterId?: SortOrder
+    completed?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type SharedCourseOrderByRelevanceInput = {
@@ -13661,11 +15950,6 @@ export namespace Prisma {
     courseId?: SortOrder
     sharedWith?: SortOrder
     sharedAt?: SortOrder
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -13767,14 +16051,6 @@ export namespace Prisma {
     image?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -14152,6 +16428,31 @@ export namespace Prisma {
     value?: SortOrder
   }
 
+  export type CourseCreateNestedOneWithoutChaptersInput = {
+    create?: XOR<CourseCreateWithoutChaptersInput, CourseUncheckedCreateWithoutChaptersInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutChaptersInput
+    connect?: CourseWhereUniqueInput
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type CourseUpdateOneRequiredWithoutChaptersNestedInput = {
+    create?: XOR<CourseCreateWithoutChaptersInput, CourseUncheckedCreateWithoutChaptersInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutChaptersInput
+    upsert?: CourseUpsertWithoutChaptersInput
+    connect?: CourseWhereUniqueInput
+    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutChaptersInput, CourseUpdateWithoutChaptersInput>, CourseUncheckedUpdateWithoutChaptersInput>
+  }
+
+  export type ChapterCreateNestedManyWithoutCourseInput = {
+    create?: XOR<ChapterCreateWithoutCourseInput, ChapterUncheckedCreateWithoutCourseInput> | ChapterCreateWithoutCourseInput[] | ChapterUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: ChapterCreateOrConnectWithoutCourseInput | ChapterCreateOrConnectWithoutCourseInput[]
+    createMany?: ChapterCreateManyCourseInputEnvelope
+    connect?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+  }
+
   export type UserCreateNestedOneWithoutCoursesInput = {
     create?: XOR<UserCreateWithoutCoursesInput, UserUncheckedCreateWithoutCoursesInput>
     connectOrCreate?: UserCreateOrConnectWithoutCoursesInput
@@ -14171,6 +16472,13 @@ export namespace Prisma {
     connect?: SharedCourseWhereUniqueInput | SharedCourseWhereUniqueInput[]
   }
 
+  export type ChapterUncheckedCreateNestedManyWithoutCourseInput = {
+    create?: XOR<ChapterCreateWithoutCourseInput, ChapterUncheckedCreateWithoutCourseInput> | ChapterCreateWithoutCourseInput[] | ChapterUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: ChapterCreateOrConnectWithoutCourseInput | ChapterCreateOrConnectWithoutCourseInput[]
+    createMany?: ChapterCreateManyCourseInputEnvelope
+    connect?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+  }
+
   export type FileUncheckedCreateNestedManyWithoutCoursesInput = {
     create?: XOR<FileCreateWithoutCoursesInput, FileUncheckedCreateWithoutCoursesInput> | FileCreateWithoutCoursesInput[] | FileUncheckedCreateWithoutCoursesInput[]
     connectOrCreate?: FileCreateOrConnectWithoutCoursesInput | FileCreateOrConnectWithoutCoursesInput[]
@@ -14184,12 +16492,22 @@ export namespace Prisma {
     connect?: SharedCourseWhereUniqueInput | SharedCourseWhereUniqueInput[]
   }
 
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
-  }
-
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type ChapterUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<ChapterCreateWithoutCourseInput, ChapterUncheckedCreateWithoutCourseInput> | ChapterCreateWithoutCourseInput[] | ChapterUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: ChapterCreateOrConnectWithoutCourseInput | ChapterCreateOrConnectWithoutCourseInput[]
+    upsert?: ChapterUpsertWithWhereUniqueWithoutCourseInput | ChapterUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: ChapterCreateManyCourseInputEnvelope
+    set?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+    disconnect?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+    delete?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+    connect?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+    update?: ChapterUpdateWithWhereUniqueWithoutCourseInput | ChapterUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: ChapterUpdateManyWithWhereWithoutCourseInput | ChapterUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: ChapterScalarWhereInput | ChapterScalarWhereInput[]
   }
 
   export type UserUpdateOneRequiredWithoutCoursesNestedInput = {
@@ -14227,6 +16545,20 @@ export namespace Prisma {
     deleteMany?: SharedCourseScalarWhereInput | SharedCourseScalarWhereInput[]
   }
 
+  export type ChapterUncheckedUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<ChapterCreateWithoutCourseInput, ChapterUncheckedCreateWithoutCourseInput> | ChapterCreateWithoutCourseInput[] | ChapterUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: ChapterCreateOrConnectWithoutCourseInput | ChapterCreateOrConnectWithoutCourseInput[]
+    upsert?: ChapterUpsertWithWhereUniqueWithoutCourseInput | ChapterUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: ChapterCreateManyCourseInputEnvelope
+    set?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+    disconnect?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+    delete?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+    connect?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+    update?: ChapterUpdateWithWhereUniqueWithoutCourseInput | ChapterUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: ChapterUpdateManyWithWhereWithoutCourseInput | ChapterUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: ChapterScalarWhereInput | ChapterScalarWhereInput[]
+  }
+
   export type FileUncheckedUpdateManyWithoutCoursesNestedInput = {
     create?: XOR<FileCreateWithoutCoursesInput, FileUncheckedCreateWithoutCoursesInput> | FileCreateWithoutCoursesInput[] | FileUncheckedCreateWithoutCoursesInput[]
     connectOrCreate?: FileCreateOrConnectWithoutCoursesInput | FileCreateOrConnectWithoutCoursesInput[]
@@ -14252,6 +16584,10 @@ export namespace Prisma {
     update?: SharedCourseUpdateWithWhereUniqueWithoutCourseInput | SharedCourseUpdateWithWhereUniqueWithoutCourseInput[]
     updateMany?: SharedCourseUpdateManyWithWhereWithoutCourseInput | SharedCourseUpdateManyWithWhereWithoutCourseInput[]
     deleteMany?: SharedCourseScalarWhereInput | SharedCourseScalarWhereInput[]
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type CourseCreateNestedOneWithoutSharedWithInput = {
@@ -14376,10 +16712,6 @@ export namespace Prisma {
     connectOrCreate?: SharedCourseCreateOrConnectWithoutUserInput | SharedCourseCreateOrConnectWithoutUserInput[]
     createMany?: SharedCourseCreateManyUserInputEnvelope
     connect?: SharedCourseWhereUniqueInput | SharedCourseWhereUniqueInput[]
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -14765,17 +17097,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -14828,6 +17149,17 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -14847,6 +17179,14 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -14860,14 +17200,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     search?: string
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -14949,6 +17281,90 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type CourseCreateWithoutChaptersInput = {
+    id?: string
+    title: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutCoursesInput
+    files?: FileCreateNestedManyWithoutCoursesInput
+    sharedWith?: SharedCourseCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUncheckedCreateWithoutChaptersInput = {
+    id?: string
+    title: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    authorId: string
+    files?: FileUncheckedCreateNestedManyWithoutCoursesInput
+    sharedWith?: SharedCourseUncheckedCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseCreateOrConnectWithoutChaptersInput = {
+    where: CourseWhereUniqueInput
+    create: XOR<CourseCreateWithoutChaptersInput, CourseUncheckedCreateWithoutChaptersInput>
+  }
+
+  export type CourseUpsertWithoutChaptersInput = {
+    update: XOR<CourseUpdateWithoutChaptersInput, CourseUncheckedUpdateWithoutChaptersInput>
+    create: XOR<CourseCreateWithoutChaptersInput, CourseUncheckedCreateWithoutChaptersInput>
+    where?: CourseWhereInput
+  }
+
+  export type CourseUpdateToOneWithWhereWithoutChaptersInput = {
+    where?: CourseWhereInput
+    data: XOR<CourseUpdateWithoutChaptersInput, CourseUncheckedUpdateWithoutChaptersInput>
+  }
+
+  export type CourseUpdateWithoutChaptersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutCoursesNestedInput
+    files?: FileUpdateManyWithoutCoursesNestedInput
+    sharedWith?: SharedCourseUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateWithoutChaptersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    files?: FileUncheckedUpdateManyWithoutCoursesNestedInput
+    sharedWith?: SharedCourseUncheckedUpdateManyWithoutCourseNestedInput
+  }
+
+  export type ChapterCreateWithoutCourseInput = {
+    id?: string
+    title: string
+    duration: string
+    content: JsonNullValueInput | InputJsonValue
+  }
+
+  export type ChapterUncheckedCreateWithoutCourseInput = {
+    id?: string
+    title: string
+    duration: string
+    content: JsonNullValueInput | InputJsonValue
+  }
+
+  export type ChapterCreateOrConnectWithoutCourseInput = {
+    where: ChapterWhereUniqueInput
+    create: XOR<ChapterCreateWithoutCourseInput, ChapterUncheckedCreateWithoutCourseInput>
+  }
+
+  export type ChapterCreateManyCourseInputEnvelope = {
+    data: ChapterCreateManyCourseInput | ChapterCreateManyCourseInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserCreateWithoutCoursesInput = {
@@ -15033,6 +17449,33 @@ export namespace Prisma {
   export type SharedCourseCreateManyCourseInputEnvelope = {
     data: SharedCourseCreateManyCourseInput | SharedCourseCreateManyCourseInput[]
     skipDuplicates?: boolean
+  }
+
+  export type ChapterUpsertWithWhereUniqueWithoutCourseInput = {
+    where: ChapterWhereUniqueInput
+    update: XOR<ChapterUpdateWithoutCourseInput, ChapterUncheckedUpdateWithoutCourseInput>
+    create: XOR<ChapterCreateWithoutCourseInput, ChapterUncheckedCreateWithoutCourseInput>
+  }
+
+  export type ChapterUpdateWithWhereUniqueWithoutCourseInput = {
+    where: ChapterWhereUniqueInput
+    data: XOR<ChapterUpdateWithoutCourseInput, ChapterUncheckedUpdateWithoutCourseInput>
+  }
+
+  export type ChapterUpdateManyWithWhereWithoutCourseInput = {
+    where: ChapterScalarWhereInput
+    data: XOR<ChapterUpdateManyMutationInput, ChapterUncheckedUpdateManyWithoutCourseInput>
+  }
+
+  export type ChapterScalarWhereInput = {
+    AND?: ChapterScalarWhereInput | ChapterScalarWhereInput[]
+    OR?: ChapterScalarWhereInput[]
+    NOT?: ChapterScalarWhereInput | ChapterScalarWhereInput[]
+    id?: StringFilter<"Chapter"> | string
+    title?: StringFilter<"Chapter"> | string
+    duration?: StringFilter<"Chapter"> | string
+    content?: JsonFilter<"Chapter">
+    courseId?: StringFilter<"Chapter"> | string
   }
 
   export type UserUpsertWithoutCoursesInput = {
@@ -15137,9 +17580,9 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
-    content: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    chapters?: ChapterCreateNestedManyWithoutCourseInput
     author: UserCreateNestedOneWithoutCoursesInput
     files?: FileCreateNestedManyWithoutCoursesInput
   }
@@ -15148,10 +17591,10 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
-    content: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: string
+    chapters?: ChapterUncheckedCreateNestedManyWithoutCourseInput
     files?: FileUncheckedCreateNestedManyWithoutCoursesInput
   }
 
@@ -15212,9 +17655,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chapters?: ChapterUpdateManyWithoutCourseNestedInput
     author?: UserUpdateOneRequiredWithoutCoursesNestedInput
     files?: FileUpdateManyWithoutCoursesNestedInput
   }
@@ -15223,10 +17666,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
+    chapters?: ChapterUncheckedUpdateManyWithoutCourseNestedInput
     files?: FileUncheckedUpdateManyWithoutCoursesNestedInput
   }
 
@@ -15422,9 +17865,9 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
-    content: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    chapters?: ChapterCreateNestedManyWithoutCourseInput
     files?: FileCreateNestedManyWithoutCoursesInput
     sharedWith?: SharedCourseCreateNestedManyWithoutCourseInput
   }
@@ -15433,9 +17876,9 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
-    content: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    chapters?: ChapterUncheckedCreateNestedManyWithoutCourseInput
     files?: FileUncheckedCreateNestedManyWithoutCoursesInput
     sharedWith?: SharedCourseUncheckedCreateNestedManyWithoutCourseInput
   }
@@ -15630,7 +18073,6 @@ export namespace Prisma {
     id?: StringFilter<"Course"> | string
     title?: StringFilter<"Course"> | string
     description?: StringFilter<"Course"> | string
-    content?: JsonFilter<"Course">
     createdAt?: DateTimeFilter<"Course"> | Date | string
     updatedAt?: DateTimeFilter<"Course"> | Date | string
     authorId?: StringFilter<"Course"> | string
@@ -16047,9 +18489,9 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
-    content: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    chapters?: ChapterCreateNestedManyWithoutCourseInput
     author: UserCreateNestedOneWithoutCoursesInput
     sharedWith?: SharedCourseCreateNestedManyWithoutCourseInput
   }
@@ -16058,10 +18500,10 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
-    content: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: string
+    chapters?: ChapterUncheckedCreateNestedManyWithoutCourseInput
     sharedWith?: SharedCourseUncheckedCreateNestedManyWithoutCourseInput
   }
 
@@ -16209,10 +18651,38 @@ export namespace Prisma {
     sharedCourses?: SharedCourseUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type ChapterCreateManyCourseInput = {
+    id?: string
+    title: string
+    duration: string
+    content: JsonNullValueInput | InputJsonValue
+  }
+
   export type SharedCourseCreateManyCourseInput = {
     id?: string
     sharedWith: string
     sharedAt?: Date | string
+  }
+
+  export type ChapterUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type ChapterUncheckedUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type ChapterUncheckedUpdateManyWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    duration?: StringFieldUpdateOperationsInput | string
+    content?: JsonNullValueInput | InputJsonValue
   }
 
   export type FileUpdateWithoutCoursesInput = {
@@ -16308,7 +18778,6 @@ export namespace Prisma {
     id?: string
     title: string
     description: string
-    content: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16448,9 +18917,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chapters?: ChapterUpdateManyWithoutCourseNestedInput
     files?: FileUpdateManyWithoutCoursesNestedInput
     sharedWith?: SharedCourseUpdateManyWithoutCourseNestedInput
   }
@@ -16459,9 +18928,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chapters?: ChapterUncheckedUpdateManyWithoutCourseNestedInput
     files?: FileUncheckedUpdateManyWithoutCoursesNestedInput
     sharedWith?: SharedCourseUncheckedUpdateManyWithoutCourseNestedInput
   }
@@ -16470,7 +18939,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16529,9 +18997,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chapters?: ChapterUpdateManyWithoutCourseNestedInput
     author?: UserUpdateOneRequiredWithoutCoursesNestedInput
     sharedWith?: SharedCourseUpdateManyWithoutCourseNestedInput
   }
@@ -16540,10 +19008,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string
+    chapters?: ChapterUncheckedUpdateManyWithoutCourseNestedInput
     sharedWith?: SharedCourseUncheckedUpdateManyWithoutCourseNestedInput
   }
 
@@ -16551,7 +19019,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    content?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: StringFieldUpdateOperationsInput | string

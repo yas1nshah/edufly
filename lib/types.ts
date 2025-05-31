@@ -6,9 +6,9 @@ export interface Lesson {
 }
 
 export interface Chapter {
-    id: number;
+    id: string | null;
+    completed: boolean;
     title: string;
     duration: string;
-    completed: boolean;
     content: string;
 }

@@ -1,6 +1,7 @@
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"
+import { get } from "http"
 import { Play } from "lucide-react"
 
 interface YouTubeEmbedProps {
@@ -14,7 +15,7 @@ export function YouTubeEmbed({ videoId, title }: YouTubeEmbedProps) {
       <CardContent className="p-0">
         <div className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden">
           <iframe
-            src={`https://www.youtube.com/embed/${videoId}`}
+            src={`https://www.youtube.com/embed/${getVideoId(videoId)}`}
             title={title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -31,3 +32,9 @@ export function YouTubeEmbed({ videoId, title }: YouTubeEmbedProps) {
     </Card>
   )
 }
+
+const getVideoId = (input: string) => {
+  const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i;
+  const match = input.match(regex);
+  return match ? match[1] : input;
+};

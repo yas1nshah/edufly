@@ -4,7 +4,7 @@ import { useMemo } from "react"
 import { Quiz } from "@/components/course-new/quiz"
 import { YouTubeEmbed } from "@/components/course-new/youtube-embed"
 import { TerminalCodeBlock } from "@/components/course-new/terminal-code-block"
-import { MermaidDiagram } from "@/components/course-new/mermaid-diagram"
+// import { MermaidDiagram } from "@/components/course-new/mermaid-diagram"
 import { MathFormula } from "@/components/course-new/math-formula"
 
 interface MDXContentProps {
@@ -118,7 +118,7 @@ export function MDXContent({ content }: MDXContentProps) {
             const title = titleMatch ? decodeEscaped(titleMatch[1]) : "Diagram"
             const type = typeMatch ? decodeEscaped(typeMatch[1]) : "flowchart"
 
-            return <MermaidDiagram key={`mermaid-${index}`} chart={chart} title={title}/>
+            // return <MermaidDiagram key={`mermaid-${index}`} chart={chart} title={title}/>
         }
         }
 
