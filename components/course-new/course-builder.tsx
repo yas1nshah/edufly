@@ -11,6 +11,7 @@ import { NotionEditor } from "@/components/course-new/notion-editor"
 import CourseChapters from "./course-sections"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs"
 import FileCard from "./file-card"
+import SmartAssistant from "./smart-assistant"
 
 // Sample course data with advanced components
 const temp = {
@@ -448,7 +449,9 @@ export function CourseBuilder({courseData }: { courseData: Prop }) {
           <FileCard key={file.id} file={file} />
         ))}
         </TabsContent>
-        <TabsContent value="chat">Change your password here.</TabsContent>
+        <TabsContent value="chat">
+          <SmartAssistant files={courseData.files?.map(file => file.key) || []} />
+        </TabsContent>
       </Tabs>
       </div>
     </div>
