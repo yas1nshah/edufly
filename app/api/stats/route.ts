@@ -21,7 +21,7 @@ export const GET = async (req: NextRequest) => {
     where: { sharedWith: userId },
   });
 
-  const usage = await db.usage.findFirst({
+  let usage = await db.usage.findFirst({
     where: {
       userId,
       type: "ai_tokens",
@@ -30,6 +30,12 @@ export const GET = async (req: NextRequest) => {
       value: true,
     },
   });
+
+  if (!usage) {
+    usage = {
+      value: 0,
+    }
+  }
 
   // Step 1: Get all completed chapterIds for this user
   const completions = await db.userCourseCompletion.findMany({
