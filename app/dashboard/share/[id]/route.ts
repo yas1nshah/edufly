@@ -3,8 +3,8 @@ import db from "@/lib/db"
 import { NextRequest } from "next/server"
 import { redirect } from 'next/navigation'
 
-export const GET = async (req: NextRequest, { params }: { params: { id: string } }) => {
-  const id = params.id
+export const GET = async (req: NextRequest, { params }: { params: Promise<{ id: string }> }) => {
+  const id = (await (params)).id
   const session = await auth.api.getSession(req)
 
   if (!session?.user.id) {
