@@ -34,133 +34,80 @@ const AiCourseBuilder: React.FC<AiCourseBuilderProps> = ({ selected }) => {
     setYoutubeLinks(updated)
   }
 
- const parseAIResponse = (result: string) => {
-  try {
-    // Step 1: Extract JSON from ```json ... ``` block
-    const jsonMatch = result.match(/```json\s*([\s\S]*?)\s*```/);
-    if (!jsonMatch) {
-      throw new Error('No JSON block found in AI response');
-    }
-    
-    let jsonString = jsonMatch[1].trim();
-    
-    // Step 2: Clean up the JSON string
-    // Remove any remaining markdown artifacts
-    jsonString = jsonString.replace(/```[\s\S]*?```/g, ''); // Remove any nested code blocks
-    jsonString = jsonString.replace(/`([^`]*)`/g, '$1'); // Remove single backticks around text
-    
-    // Step 3: Fix common JSON issues in the content
-    // The main issue is that the "content" fields contain unescaped quotes and newlines
-    // We need to properly escape these
-    
-    // Parse the JSON (this might still fail, so we'll catch and fix)
-    let courseStructure;
+  const handleGenerate = async () => {
     try {
-      courseStructure = JSON.parse(jsonString);
-    } catch (parseError) {
-      // If parsing fails, try to fix common issues
-      console.log('Initial parse failed, attempting to fix JSON...');
+      setIsGenerating(true)
+      setStreamingData('')
+      setError(null)
       
-      // Fix unescaped quotes in content strings
-      jsonString = jsonString.replace(
-        /"content":\s*"([\s\S]*?)"/g, 
-        (match, content) => {
-          // Properly escape the content
-          const escapedContent = content
-            .replace(/\\/g, '\\\\')     // Escape backslashes
-            .replace(/"/g, '\\"')       // Escape quotes
-            .replace(/\n/g, '\\n')      // Escape newlines
-            .replace(/\r/g, '\\r')      // Escape carriage returns
-            .replace(/\t/g, '\\t');     // Escape tabs
-          
-          return `"content": "${escapedContent}"`;
+      const validYoutubeLinks = youtubeLinks.filter(link => link.trim())
+      const fileUrls = selected.map(url => `https://cdn.edufly.localhook.online/${url}`)
+      const youtubeSection = validYoutubeLinks.length > 0 ? `\n\nYouTube Videos:\n${validYoutubeLinks.join('\n')}` : ''
+      const contextSection = extraContext ? `\n\nAdditional Context:\n${extraContext}` : ''
+      
+      const fullPrompt = `${systemPrompt}\n\nFiles:\n${fileUrls.join('\n')}${youtubeSection}${contextSection}`
+
+      // Generate course structure with streaming
+      const response = await fetch('/api/ai/gemini-2.0-flash', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: fullPrompt }),
+      })
+
+      if (!response.body) throw new Error('No response body from AI')
+
+      const reader = response.body.getReader()
+      const decoder = new TextDecoder()
+      let result = '', done = false
+
+      while (!done) {
+        const { value, done: readerDone } = await reader.read()
+        if (value) {
+          const chunk = decoder.decode(value)
+          result += chunk
+          setStreamingData(result)
         }
-      );
-      
-      // Try parsing again
-      courseStructure = JSON.parse(jsonString);
-    }
-    
-    return courseStructure;
-    
-  } catch (error: any) {
-    console.error('JSON parsing error:', error);
-    console.error('Raw response:', result);
-    throw new Error(`Failed to parse AI response: ${error.message}`);
-  }
-};
-
-// Usage in your component:
-const handleGenerate = async () => {
-  try {
-    setIsGenerating(true)
-    setStreamingData('')
-    setError(null)
-    
-    const validYoutubeLinks = youtubeLinks.filter(link => link.trim())
-    const fileUrls = selected.map(url => `https://cdn.edufly.localhook.online/${url}`)
-    const youtubeSection = validYoutubeLinks.length > 0 ? `\n\nYouTube Videos:\n${validYoutubeLinks.join('\n')}` : ''
-    const contextSection = extraContext ? `\n\nAdditional Context:\n${extraContext}` : ''
-    
-    const fullPrompt = `${systemPrompt}\n\nFiles:\n${fileUrls.join('\n')}${youtubeSection}${contextSection}`
-
-    // Generate course structure with streaming
-    const response = await fetch('/api/ai/gemini-2.0-flash', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt: fullPrompt }),
-    })
-
-    if (!response.body) throw new Error('No response body from AI')
-
-    const reader = response.body.getReader()
-    const decoder = new TextDecoder()
-    let result = '', done = false
-
-    while (!done) {
-      const { value, done: readerDone } = await reader.read()
-      if (value) {
-        const chunk = decoder.decode(value)
-        result += chunk
-        setStreamingData(result)
+        done = readerDone
       }
-      done = readerDone
+
+      // Parse the AI response
+      const cleanedResult = result.replace(/```json\n?|\n?```$/g, '').replace(/"/g, '\\"').replace(/%%/g, '"')
+      const courseStructure = JSON.parse(cleanedResult)
+
+      const gelle = 
+      
+      setIsGenerating(false)
+      setIsCreating(true)
+
+      // Create the course
+      const createResponse = await fetch('/api/course', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: courseStructure.title,
+          description: courseStructure.description,
+          chapters: courseStructure.chapters,
+          files: selected,
+          youtubeLinks: validYoutubeLinks,
+          extraContext
+        }),
+      })
+
+      if (!createResponse.ok) throw new Error('Failed to save course')
+      
+      const savedCourse = await createResponse.json()
+      
+      // Navigate to the course
+      router.push(`/dashboard/courses/${savedCourse.id}`)
+      
+    } catch (err) {
+      console.error(err)
+      setError(err instanceof Error ? err.message : 'An error occurred')
+      setIsGenerating(false)
+      setIsCreating(false)
     }
-
-    // Parse the AI response using the new function
-    const courseStructure = parseAIResponse(result);
-    
-    setIsGenerating(false)
-    setIsCreating(true)
-
-    // Create the course
-    const createResponse = await fetch('/api/course', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        title: courseStructure.title,
-        description: courseStructure.description,
-        chapters: courseStructure.chapters,
-        files: selected,
-        youtubeLinks: validYoutubeLinks,
-        extraContext
-      }),
-    })
-
-    if (!createResponse.ok) throw new Error('Failed to save course')
-    
-    const savedCourse = await createResponse.json()
-    
-    // Navigate to the course
-    router.push(`/dashboard/courses/${savedCourse.id}`)
-    
-  } catch (err) {
-    console.error(err)
-    setError(err instanceof Error ? err.message : 'An error occurred')
-    setIsGenerating(false)
-    setIsCreating(false)
   }
-}
+
   const hasContent = selected.length > 0 || youtubeLinks.some(link => link.trim()) || extraContext.trim()
   const isProcessing = isGenerating || isCreating
 
