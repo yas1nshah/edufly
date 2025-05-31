@@ -13,7 +13,7 @@ interface Block {
   id: string
   type: "text" | "heading" | "code" | "quiz" | "youtube" | "list" | "diagram" | "math" 
   content: string
-  metadata?: Record<string, any>
+  metadata?: Record<string, any> // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 interface NotionEditorProps {
@@ -282,7 +282,7 @@ export function NotionEditor({ initialContent, onSave, onCancel }: NotionEditorP
     }
   }
 
-  const insertComponent = (type: string, metadata?: Record<string, any>) => {
+  const insertComponent = (type: string, metadata?: Record<string, any>) => { // eslint-disable-line @typescript-eslint/no-explicit-any
     if (activeBlockId) {
       const block = blocks.find((b) => b.id === activeBlockId)
       if (block) {
@@ -298,7 +298,7 @@ export function NotionEditor({ initialContent, onSave, onCancel }: NotionEditorP
           // Insert the new component block after the current block
           const newBlock: Block = {
             id: Math.random().toString(36).substring(2, 11),
-            type: type as any,
+            type: type as any, // eslint-disable-line @typescript-eslint/no-explicit-any
             content: "",
             metadata,
           }
@@ -308,7 +308,7 @@ export function NotionEditor({ initialContent, onSave, onCancel }: NotionEditorP
           setBlocks(newBlocks)
         } else {
           // If the slash is at the beginning, just convert the current block
-          updateBlock(activeBlockId, { type: type as any, content: "", metadata })
+          updateBlock(activeBlockId, { type: type as any, content: "", metadata }) // eslint-disable-line @typescript-eslint/no-explicit-any
         }
       }
 
@@ -368,7 +368,7 @@ export function NotionEditor({ initialContent, onSave, onCancel }: NotionEditorP
             </div>
           </div>
           <p className="text-sm text-gray-500 mt-1">
-            Type "/" at the beginning of a line to add components. Press Enter to create new blocks.
+            Type / at the beginning of a line to add components. Press Enter to create new blocks.
           </p>
         </CardContent>
       </Card>

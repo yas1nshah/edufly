@@ -2,7 +2,6 @@
 
 import { useQuery } from '@tanstack/react-query'
 import React, { useEffect } from 'react'
-import AiCourseBuilder from './ai-course-builder'
 import { CourseBuilder } from './course-builder'
 import { Skeleton } from '../ui/skeleton'
 
@@ -22,7 +21,7 @@ const CourceView = ({id}: {id: string}) => {
 
       const recentCourses = JSON.parse(localStorage.getItem('recent_courses') || '[]')
 
-      const alreadyExists = recentCourses.some((course: any) => course.id === data.id)
+      const alreadyExists = recentCourses.some((course: { id: string, title: string }) => course.id === data.id)
       if (alreadyExists) return
 
       const updatedCourses = [...recentCourses, { id: data.id, title: data.title }]

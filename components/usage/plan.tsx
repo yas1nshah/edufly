@@ -11,6 +11,22 @@ const ActivePlan = () => {
       return res.json()
     }
   })
+
+  if (isFetching) return <div>
+    <div className="flex gap-4">
+      <div className="bg-card/50 space-y-4 grow h-screen/2 p-4 rounded-md">
+        <div className="h-20 w-full bg-card/50 animate-pulse"></div>
+        <div className="h-80 w-full bg-card/50 animate-pulse"></div>
+        <div className="h-20 w-full bg-card/50 animate-pulse"></div>
+        <div className="h-60 w-full bg-card/50 animate-pulse"></div>
+
+      </div>
+      <div className="bg-card/50 w-1/4 h-screen p-4 rounded-md space-y-4">
+        <div className="h-20 w-full bg-card/50 animate-pulse"></div>
+        <div className="h-48 w-full bg-card/50 animate-pulse"></div>
+      </div>
+    </div>
+  </div>
   
   return (
     <div className='bg-background rounded-lg px-3 py-2 flex justify-between items-center'>

@@ -225,7 +225,7 @@ export function FileUploader({ onBack, fileType, onUploadComplete }: FileUploade
           uploadedFileIds.push(fileId)
 
           setFiles((prev) => prev.map((f) => (f.id === item.id ? { ...f, status: "done", progress: 100 } : f)))
-        } catch (err: any) {
+        } catch (err) {
           console.error(err)
           toast.error(`Failed to upload ${item.file.name}`)
           setFiles((prev) => prev.map((f) => (f.id === item.id ? { ...f, status: "error", progress: 0 } : f)))

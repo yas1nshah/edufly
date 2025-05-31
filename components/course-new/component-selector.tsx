@@ -11,7 +11,7 @@ interface ComponentOption {
   name: string
   description: string
   icon: React.ReactNode
-  metadata?: Record<string, any>
+  metadata?: Record<string, any> // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 const componentOptions: ComponentOption[] = [
@@ -97,7 +97,7 @@ const componentOptions: ComponentOption[] = [
 
 interface ComponentSelectorProps {
   position: { x: number; y: number }
-  onSelect: (type: string, metadata?: Record<string, any>) => void
+  onSelect: (type: string, metadata?: Record<string, any>) => void // eslint-disable-line @typescript-eslint/no-explicit-any
   onClose: () => void
 }
 

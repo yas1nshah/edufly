@@ -1,20 +1,6 @@
 "use client"
 
-import {
-  IconDots,
-  IconFolder,
-  IconShare3,
-  IconTrash,
-  type Icon,
-} from "@tabler/icons-react"
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -44,17 +30,7 @@ function getRandomCourses(courses: any[], count: number) {
   return shuffled.slice(0, count)
 }
 
-export function NavDocuments({
-  items,
-}: {
-  items: {
-    name: string
-    url: string
-    icon: Icon
-  }[]
-}) {
-  const { isMobile } = useSidebar()
-
+export function NavDocuments() {
   const recentCourses =
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("recent_courses") || "[]")

@@ -1,6 +1,5 @@
 
 import { auth } from "@/lib/auth"
-import { chapters as chapterData } from "@/lib/course-data"
 import db from "@/lib/db"
 import { NextRequest } from "next/server"
 
@@ -159,7 +158,7 @@ export const POST = async (
     return new Response("Unauthorized", { status: 401 })
 
   const body: Prop = await req.json()
-  const { title, description, chapters, files } = body
+  const { title, description, chapters } = body
 
   try {
     const ops = []

@@ -1,7 +1,6 @@
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"
-import { get } from "http"
 import { Play } from "lucide-react"
 
 interface YouTubeEmbedProps {
@@ -13,7 +12,7 @@ export function YouTubeEmbed({ videoId, title }: YouTubeEmbedProps) {
   return (
     <Card className="my-6 p-0">
       <CardContent className="p-0">
-        <div className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden">
+        <div className="relative aspect-video bg-muted rounded-lg overflow-hidden">
           <iframe
             src={`https://www.youtube.com/embed/${getVideoId(videoId)}`}
             title={title}

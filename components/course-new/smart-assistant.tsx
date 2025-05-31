@@ -88,7 +88,6 @@ const SmartAssistant: React.FC<SmartAssistantProps> = ({ files }) => {
 
       const reader = res.body.getReader()
       const decoder = new TextDecoder()
-      let result = ''
       let done = false
 
       const aiMessage: Message = {
@@ -102,8 +101,6 @@ const SmartAssistant: React.FC<SmartAssistantProps> = ({ files }) => {
         const { value, done: readerDone } = await reader.read()
         if (value) {
           const chunk = decoder.decode(value)
-          result += chunk
-
           setMessages((prev) => {
             const updated = [...prev]
             const last = updated[updated.length - 1]
@@ -118,9 +115,9 @@ const SmartAssistant: React.FC<SmartAssistantProps> = ({ files }) => {
         }
         done = readerDone
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error(err)
-      setError(err.message || 'Something went wrong')
+      setError( 'Something went wrong')
       setMessages((prev) => prev.filter((msg, i) => i !== prev.length - 1 || msg.role !== 'assistant' || msg.content !== ''))
     } finally {
       setIsLoading(false)
@@ -147,7 +144,7 @@ const SmartAssistant: React.FC<SmartAssistantProps> = ({ files }) => {
                 <Bot className="w-4 h-4 text-white" />
               </div>
               <div className="bg-accent border border-primary rounded-lg rounded-tl-none px-3 py-2 max-w-xs text-sm">
-                👋 Hi! I'm here to help you understand your course materials. Ask me anything about the topics you're studying!
+                👋 Hi! Im here to help you understand your course materials. Ask me anything about the topics youre studying!
               </div>
             </div>
           )}

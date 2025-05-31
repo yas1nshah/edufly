@@ -8,26 +8,16 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { Play, CheckCircle, Clock, Users, Edit3, Eye, Plus, Save, X, Trash2, GripVertical, Share2, Copy } from "lucide-react"
+import { Play, CheckCircle, Clock, Edit3, Eye, Plus, Save, X, Trash2, Share2 } from "lucide-react"
 import { MDXContent } from "@/components/course-new/mdx-content"
 import { NotionEditor } from "@/components/course-new/notion-editor"
-import CourseChapters from "./course-sections"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs"
 import FileCard from "./file-card"
 import SmartAssistant from "./smart-assistant"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
-import { getQueryClient } from "@/lib/get-query-client"
 import { authClient } from "@/lib/auth-client"
 
-// OLD TYPE
-type Chapter = {
-  id: string | null;
-  completed: boolean;
-  title: string;
-  duration: string;
-  content: string;
-}
 
 // NEW TYPE
 type Prop = {
@@ -79,7 +69,7 @@ export function CourseBuilder({ courseData }: { courseData: Prop }) {
 
   const queryClient = useQueryClient()
 
-  const { data: courseStatus, isFetching, refetch} = useQuery<CourseStatusItem[]>({
+  const { data: courseStatus} = useQuery<CourseStatusItem[]>({
     queryKey: ["course-status", courseData.id],
     queryFn: async () => {
       const res = await fetch(`/api/course/${courseData.id}/status`)
@@ -613,7 +603,7 @@ export function CourseBuilder({ courseData }: { courseData: Prop }) {
               </div>
 
               <div className="space-y-2">
-                {courseChapters.map((chapter, index) => {
+                {courseChapters.map((chapter) => {
                   const chapterCompleted = isChapterCompleted(chapter.id)
                   const isUpdating = updatingChapter === chapter.id
                   

@@ -20,7 +20,7 @@ export const POST = async (req: Request) => {
         })),
       },
       chapters: {
-        create: chapters.map((chapter: any) => ({
+        create: chapters.map((chapter: { title: string; duration: string; content: string }) => ({
           id: crypto.randomUUID(),
           title: chapter.title,
           duration: chapter.duration,

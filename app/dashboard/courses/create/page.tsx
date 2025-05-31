@@ -2,9 +2,7 @@
 
 import { SiteHeader } from '@/components/site-header'
 import React, { useState } from 'react'
-import MyEditorPage from '@/components/editor/playground'
 import { CompactFileSelection } from '@/components/uploads/file-selection'
-import CourseBuilder from '@/components/course/course-builder'
 import AiCourseBuilder from '@/components/course-new/ai-course-builder'
 
 import { Sparkles, Upload, Files } from 'lucide-react'

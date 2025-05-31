@@ -6,6 +6,7 @@ import { YouTubeEmbed } from "@/components/course-new/youtube-embed"
 import { TerminalCodeBlock } from "@/components/course-new/terminal-code-block"
 // import { MermaidDiagram } from "@/components/course-new/mermaid-diagram"
 import { MathFormula } from "@/components/course-new/math-formula"
+import { MermaidDiagram } from "./mermaid-diagram"
 
 interface MDXContentProps {
   content: string
@@ -108,7 +109,7 @@ export function MDXContent({ content }: MDXContentProps) {
       if (part.startsWith("<MermaidDiagram")) {
         const chartMatch = part.match(/chart="((?:[^"\\]|\\.)*)"/)
         const titleMatch = part.match(/title="((?:[^"\\]|\\.)*)"/)
-        const typeMatch = part.match(/type="((?:[^"\\]|\\.)*)"/)
+        // const typeMatch = part.match(/type="((?:[^"\\]|\\.)*)"/)
 
         if (chartMatch) {
             const decodeEscaped = (str: string) =>
@@ -116,9 +117,9 @@ export function MDXContent({ content }: MDXContentProps) {
 
             const chart = decodeEscaped(chartMatch[1])
             const title = titleMatch ? decodeEscaped(titleMatch[1]) : "Diagram"
-            const type = typeMatch ? decodeEscaped(typeMatch[1]) : "flowchart"
+            // const type = typeMatch ? decodeEscaped(typeMatch[1]) : "flowchart"
 
-            // return <MermaidDiagram key={`mermaid-${index}`} chart={chart} title={title}/>
+            return <MermaidDiagram key={`mermaid-${index}`} chart={chart} title={title}/>
         }
         }
 

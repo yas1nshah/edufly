@@ -13,7 +13,7 @@ interface Block {
   id: string
   type: "text" | "heading" | "code" | "quiz" | "youtube" | "list" | "diagram" | "math" 
   content: string
-  metadata?: Record<string, any>
+  metadata?: Record<string, any> // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 interface EditorBlockProps {
@@ -24,7 +24,7 @@ interface EditorBlockProps {
   onKeyDown: (e: React.KeyboardEvent) => void
 }
 
-export function EditorBlock({ block, index, onUpdate, onDelete, onKeyDown }: EditorBlockProps) {
+export function EditorBlock({ block, onUpdate, onDelete, onKeyDown }: EditorBlockProps) {
   const [isHovered, setIsHovered] = useState(false)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 

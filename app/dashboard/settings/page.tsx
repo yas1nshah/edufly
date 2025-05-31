@@ -1,15 +1,5 @@
 import React from 'react'
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-  } from "@/components/ui/breadcrumb"
-  import { Separator } from "@/components/ui/separator"
-import { SidebarTrigger } from '@/components/ui/sidebar'
-import { ChangeEmailCard, ChangePasswordCard, DeleteAccountCard, PasskeysCard, ProvidersCard, SessionsCard, TwoFactorCard, UpdateAvatarCard } from "@daveyplate/better-auth-ui"
+import { ChangeEmailCard, ChangePasswordCard, DeleteAccountCard, ProvidersCard, SessionsCard, UpdateAvatarCard } from "@daveyplate/better-auth-ui"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { SiteHeader } from '@/components/site-header'
 

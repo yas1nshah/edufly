@@ -8,7 +8,7 @@ import {
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { GraduationCap, BookOpen, Users, Activity } from 'lucide-react'
+import {  BookOpen } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -34,14 +34,6 @@ const Dashboard = () => {
   </div>
   )
   if (!data) return <div>Loading...</div>
-
-  // Cards data created directly from fetched `data`
-  const statCards = [
-    { title: 'Courses Created', value: data.courses || 0, icon: BookOpen },
-    { title: 'Shared Courses', value: data.sharedCourses || 0, icon: Users },
-    { title: 'Files Uploaded', value: data.files || 0, icon: GraduationCap },
-    { title: 'Token Used', value: data.usage || 0, icon: Activity },
-  ]
 
   return (
     <div className="min-h-screen space-y-6 bg-muted/40">
@@ -107,7 +99,7 @@ const Dashboard = () => {
             <CardTitle>Active Courses</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            {data.progress.map((course: any, index: number) => (
+            {data.progress.map((course: { id: string, title: string, progress: number }, index: number) => (
               <div key={index} className="bg-accent p-4 rounded-md flex justify-between gap-4">
                 <div className='grow space-y-2'>
                   <div className="flex justify-between items-center text-sm font-medium">

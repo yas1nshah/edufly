@@ -1,16 +1,13 @@
 import React from 'react'
 import { ScrollArea } from '../ui/scroll-area'
 import { Chapter } from '@/lib/types'
-import { CheckCircle, Clock, Play } from 'lucide-react'
-import { Badge } from '../ui/badge'
+import { CheckCircle, } from 'lucide-react'
 import { Card, CardContent } from '../ui/card'
 
 
 
 const CourseChapters = ({courseChapters, activeChapter, setActiveChapter}: {courseChapters: Chapter[], activeChapter: string, setActiveChapter: React.Dispatch<React.SetStateAction<string | null>>}) => {
-    
-    const currentChapter = courseChapters.find((ch) => ch.id === activeChapter)
- 
+     
   return (
         <ScrollArea className="h-full">
           <div className="p-4 space-y-2">

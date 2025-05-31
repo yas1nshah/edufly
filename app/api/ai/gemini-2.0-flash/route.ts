@@ -37,7 +37,7 @@ async function trackTokenUsage(userId: string, tokens: number) {
         // console.log(`✅ Usage tracking completed: +${increments} increments`)
       }
     }
-  } catch (error) {
+  } catch {
     // console.error('❌ Error tracking token usage:', error)
     // Don't throw - continue with response even if usage tracking fails
   }

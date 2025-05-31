@@ -188,7 +188,7 @@ export default function UserFileGrid({ onUpload }: UserFileGridProps) {
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
-    } catch (error) {
+    } catch  {
       toast.error("Failed to download file")
     }
   }
@@ -197,7 +197,7 @@ export default function UserFileGrid({ onUpload }: UserFileGridProps) {
     try {
       const url = await getSignedUrl(file.key)
       window.open(url, "_blank")
-    } catch (error) {
+    } catch {
       toast.error("Failed to preview file")
     }
   }

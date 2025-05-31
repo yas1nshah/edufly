@@ -10,7 +10,7 @@ export const GET = async (req: NextRequest, { params }: { params: { id: string }
     return new Response("Unauthorized", { status: 401 })
   }
 
-  const share = await db.sharedCourse.upsert({
+  await db.sharedCourse.upsert({
     where: {
       courseId_sharedWith: {
         courseId: id,

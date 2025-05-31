@@ -76,7 +76,7 @@ const CoursesPage = () => {
   </div>
   )
 
-  const renderCourseCard = (course: any) => (
+  const renderCourseCard = (course: { id: string; title: string, description: string, updatedAt: Date, _count: { chapters: number } }) => (
     <div
       key={course.id}
       onClick={() => router.push(`/dashboard/courses/${course.id}`)}

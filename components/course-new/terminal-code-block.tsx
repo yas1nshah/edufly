@@ -20,12 +20,12 @@ export function TerminalCodeBlock({
   const [copied, setCopied] = useState(false)
   const { theme } = useTheme()
   const codeRef = useRef<HTMLElement>(null)
-  const [isPrismLoaded, setIsPrismLoaded] = useState(false)
+  const [isPrismLoaded] = useState(false)
 
 
   useEffect(() => {
     if (isPrismLoaded && codeRef.current) {
-      // We need to use the imported Prism instance here
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       const Prism = require("prismjs")
       Prism.highlightElement(codeRef.current)
     }

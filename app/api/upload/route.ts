@@ -15,7 +15,7 @@ export const POST = async (req: Request) => {
   }
 
   const body = await req.json();
-  const { fileName, fileSize, fileType, tags } = body;
+  const { fileName, fileSize, fileType } = body;
 
   if (!fileName || !fileSize || !fileType) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
