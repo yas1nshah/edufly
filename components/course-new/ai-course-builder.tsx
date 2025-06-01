@@ -34,6 +34,53 @@ const AiCourseBuilder: React.FC<AiCourseBuilderProps> = ({ selected }) => {
     setYoutubeLinks(updated)
   }
 
+  
+// Parse the AI response
+function parseAIResponse(result: any) {
+  try {
+    // Remove the ```json and ``` markers
+    let cleanedResult = result.trim();
+    
+    // Remove opening ```json (case insensitive)
+    cleanedResult = cleanedResult.replace(/^```json\s*/i, '');
+    
+    // Remove closing ```
+    cleanedResult = cleanedResult.replace(/\s*```$/, '');
+    
+    // Extract content from each chapter before parsing JSON
+    const contentMap = new Map();
+    let chapterIndex = 0;
+    
+    // Replace content with placeholder and store original content
+    cleanedResult = cleanedResult.replace(/"content":\s*"([^"]*(?:\\.[^"]*)*)"/g, (match:any, content:any) => {
+      const placeholder = `__CONTENT_PLACEHOLDER_${chapterIndex}__`;
+      contentMap.set(placeholder, content);
+      chapterIndex++;
+      return `"content": "${placeholder}"`;
+    });
+    
+    // Parse the JSON (now safe without problematic content)
+    const courseStructure = JSON.parse(cleanedResult);
+    
+    // Restore content back to chapters
+    if (courseStructure.chapters && Array.isArray(courseStructure.chapters)) {
+      courseStructure.chapters = courseStructure.chapters.map((chapter:any) => {
+        if (chapter.content && contentMap.has(chapter.content)) {
+          // Get original content and unescape JSON escaped characters
+          chapter.content = contentMap.get(chapter.content).replace(/\\"/g, '"').replace(/\\n/g, '\n').replace(/\\\\/g, '\\');
+        }
+        return chapter;
+      });
+    }
+    
+    return courseStructure;
+    
+  } catch (error) {
+    console.error('Error parsing AI response:', error);
+    throw new Error('Failed to parse course structure from AI response');
+  }
+}
+
   const handleGenerate = async () => {
     try {
       setIsGenerating(true)
@@ -71,8 +118,10 @@ const AiCourseBuilder: React.FC<AiCourseBuilderProps> = ({ selected }) => {
       }
 
       // Parse the AI response
-      const cleanedResult = result.replace(/```json([\s\S]*?)```/, (_, p1) => p1.trim())
-      const courseStructure = JSON.parse(cleanedResult)
+      // const cleanedResult = result.replace(/```json([\s\S]*?)```/, (_, p1) => p1.trim())
+      // const courseStructure = JSON.parse(cleanedResult)
+    
+      const courseStructure = parseAIResponse(result)
       
       setIsGenerating(false)
       setIsCreating(true)
