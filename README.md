@@ -15,8 +15,7 @@ EduFly is a cutting-edge Learning Management System prototype that integrates AI
 ---
 
 ## 📸 Preview
-
-> *(Add a dashboard screenshot here — e.g. `public/preview.png`)*
+![Edufly Branding](https://github.com/yas1nshah/edufly/raw/master/app/opengraph-image.jpg)
 
 ---
 
