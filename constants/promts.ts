@@ -31,6 +31,8 @@ IMPORTANT: Content must include valid markdown but dont forget to use Escape cha
 WARNING: when using code blocks dont forget to use triple backticks with escape characs otherwhite itwill break, example: \`\`\` javascript console.log('Hello'); \`\`\`
 ---
 
+REMININD AGAIN.. DONT FORGET TO USE ESCAPE CHARACTERS FOR BACKTICKS, QOUTES AND OTHER CHARACTERS WHICH MIGHT BREAK JSON
+
 The list of links for course generation will be provided immediately following this prompt. Begin generation upon receiving the links.
 `;
 
