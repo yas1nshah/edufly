@@ -35,8 +35,7 @@ const AiCourseBuilder: React.FC<AiCourseBuilderProps> = ({ selected }) => {
   }
 
   
-// Parse the AI response
-function parseAIResponse(result: any) {
+function parseAIResponse(result:any) {
   try {
     // Remove the ```json and ``` markers
     let cleanedResult = result.trim();
@@ -47,27 +46,48 @@ function parseAIResponse(result: any) {
     // Remove closing ```
     cleanedResult = cleanedResult.replace(/\s*```$/, '');
     
-    // Extract content from each chapter before parsing JSON
-    const contentMap = new Map();
-    let chapterIndex = 0;
+    // Find all content fields and extract them safely
+    const contentFields: any[] = [];
+    let modifiedJson = cleanedResult;
     
-    // Replace content with placeholder and store original content
-    cleanedResult = cleanedResult.replace(/"content":\s*"([^"]*(?:\\.[^"]*)*)"/g, (match:any, content:any) => {
-      const placeholder = `__CONTENT_PLACEHOLDER_${chapterIndex}__`;
-      contentMap.set(placeholder, content);
-      chapterIndex++;
-      return `"content": "${placeholder}"`;
+    // More robust regex to find content fields - handles nested quotes and escapes
+    const contentRegex = /"content":\s*"((?:[^"\\]|\\.|\\")*)"/g;
+    let match;
+    let index = 0;
+    
+    // Extract all content and replace with placeholders
+    while ((match = contentRegex.exec(cleanedResult)) !== null) {
+      const placeholder = `__CONTENT_PLACEHOLDER_${index}__`;
+      contentFields.push({
+        placeholder: placeholder,
+        content: match[1] // Raw content with escapes
+      });
+      index++;
+    }
+    
+    // Replace content fields with placeholders
+    modifiedJson = cleanedResult.replace(contentRegex, (match:any, content:any) => {
+      const placeholderIndex = contentFields.findIndex(item => item.content === content);
+      return `"content": "${contentFields[placeholderIndex].placeholder}"`;
     });
     
-    // Parse the JSON (now safe without problematic content)
-    const courseStructure = JSON.parse(cleanedResult);
+    // Parse the cleaned JSON
+    const courseStructure = JSON.parse(modifiedJson);
     
     // Restore content back to chapters
     if (courseStructure.chapters && Array.isArray(courseStructure.chapters)) {
       courseStructure.chapters = courseStructure.chapters.map((chapter:any) => {
-        if (chapter.content && contentMap.has(chapter.content)) {
-          // Get original content and unescape JSON escaped characters
-          chapter.content = contentMap.get(chapter.content).replace(/\\"/g, '"').replace(/\\n/g, '\n').replace(/\\\\/g, '\\');
+        if (chapter.content) {
+          const contentItem = contentFields.find(item => item.placeholder === chapter.content);
+          if (contentItem) {
+            // Properly unescape the content
+            chapter.content = contentItem.content
+              .replace(/\\"/g, '"')
+              .replace(/\\n/g, '\n')
+              .replace(/\\t/g, '\t')
+              .replace(/\\r/g, '\r')
+              .replace(/\\\\/g, '\\');
+          }
         }
         return chapter;
       });
@@ -80,7 +100,6 @@ function parseAIResponse(result: any) {
     throw new Error('Failed to parse course structure from AI response');
   }
 }
-
   const handleGenerate = async () => {
     try {
       setIsGenerating(true)
