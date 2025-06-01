@@ -32,8 +32,6 @@ export const GET = async (req: NextRequest) => {
         }
     });
 
-    console.log(subscription);
-
     return new Response(JSON.stringify(subscription), {
         status: 200,
         headers: {

@@ -5,6 +5,7 @@ import { Button } from '../ui/button'
 import { systemPrompt } from '@/constants/promts'
 import { Plus, X, Youtube, FileText, Sparkles, Clock, CheckCircle } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { R2_CDN_URL } from '@/constants/urls'
 
 interface AiCourseBuilderProps {
   selected: string[]
@@ -107,7 +108,7 @@ function parseAIResponse(result:any) {
       setError(null)
       
       const validYoutubeLinks = youtubeLinks.filter(link => link.trim())
-      const fileUrls = selected.map(url => `https://cdn.edufly.localhook.online/${url}`)
+      const fileUrls = selected.map(url => `${R2_CDN_URL}/${url}`)
       const youtubeSection = validYoutubeLinks.length > 0 ? `\n\nYouTube Videos:\n${validYoutubeLinks.join('\n')}` : ''
       const contextSection = extraContext ? `\n\nAdditional Context:\n${extraContext}` : ''
       

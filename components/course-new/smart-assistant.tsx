@@ -5,6 +5,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { Send, Bot, User } from 'lucide-react'
 import { ScrollArea } from '../ui/scroll-area'
+import { R2_CDN_URL } from '@/constants/urls'
 
 interface SmartAssistantProps {
   files: string[]
@@ -37,7 +38,7 @@ const SmartAssistant: React.FC<SmartAssistantProps> = ({ files }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-  const fileLinks = files.map((url) => `https://cdn.edufly.localhook.online/${url}`).join('\n')
+  const fileLinks = files.map((url) => `${R2_CDN_URL}/${url}`).join('\n')
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })

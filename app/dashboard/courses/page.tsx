@@ -25,18 +25,19 @@ const CoursesPage = () => {
 
   // Array of beautiful pattern images from Unsplash
   const patternImages = [
-    'https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?w=400&h=300&fit=crop&auto=format',
-    'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=300&fit=crop&auto=format',
-    'https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=400&h=300&fit=crop&auto=format',
-    'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=400&h=300&fit=crop&auto=format',
-    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop&auto=format',
-    'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=300&fit=crop&auto=format',
-    'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&auto=format',
-    'https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=400&h=300&fit=crop&auto=format',
-    'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=400&h=300&fit=crop&auto=format',
-    'https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?w=400&h=300&fit=crop&auto=format',
-    'https://images.unsplash.com/photo-1541728472741-03e45a58cf88?w=400&h=300&fit=crop&auto=format',
-    'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&auto=format'
+    'https://plus.unsplash.com/premium_vector-1689096935962-4cfad82ec090',
+    'https://plus.unsplash.com/premium_vector-1689096624566-db0de5ab24a8',
+    'https://plus.unsplash.com/premium_vector-1697729857628-1c520b61c0d0',
+    'https://plus.unsplash.com/premium_vector-1697729853800-0a48e3e9308f',
+    'https://plus.unsplash.com/premium_vector-1745338399099-6c85fc198361',
+    'https://plus.unsplash.com/premium_vector-1714618872538-536bed91c905',
+    'https://plus.unsplash.com/premium_vector-1697729834472-4c30492dd442',
+    'https://plus.unsplash.com/premium_vector-1723514408054-ceb858c06755',
+    'https://plus.unsplash.com/premium_vector-1723219830754-b0f793bf4a77',
+    'https://plus.unsplash.com/premium_vector-1689096935962-4cfad82ec090',
+    'https://plus.unsplash.com/premium_vector-1711987745290-7616f2931f61',
+    'https://plus.unsplash.com/premium_vector-1697729853800-0a48e3e9308f',
+    'https://plus.unsplash.com/premium_vector-1697729855653-a0f86e33c2d6',
   ]
 
   // Function to get a consistent image for each course based on its ID

@@ -1,3 +1,4 @@
+import { R2_CDN_URL } from '@/constants/urls'
 import { CircleArrowOutUpRight, File } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
@@ -19,7 +20,7 @@ const FileCard = ({file}: { file: {
       </div>
       <div className="grow">
       </div>
-      <Link href={'https://cdn.edufly.localhook.online/'+file.key} target="_blank" className="flex items-center gap-2">
+      <Link href={R2_CDN_URL+'/'+file.key} target="_blank" className="flex items-center gap-2">
         <CircleArrowOutUpRight className="w-5 h-5 text-muted-foreground" />
       </Link>
 

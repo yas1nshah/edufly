@@ -46,11 +46,11 @@ export function Quiz({ question, options, correct }: QuizProps) {
                 selectedAnswer === index
                   ? showResult
                     ? index === correct
-                      ? "border-green-500 bg-green-50"
-                      : "border-red-500 bg-red-50"
+                      ? "border-green-500 bg-green-50 text-card"
+                      : "border-red-500 bg-red-50 text-card"
                     : "border-blue-500 bg-secondary text-secondary-foreground"
                   : showResult && index === correct
-                    ? "border-green-500 bg-green-50"
+                    ? "border-green-500 bg-green-50 text-card"
                     : "border-accent hover:border-primary bg-accent text-accent-foreground"
               }`}
             >

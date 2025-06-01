@@ -17,6 +17,7 @@ import SmartAssistant from "./smart-assistant"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
 import { authClient } from "@/lib/auth-client"
+import { BASE_URL } from "@/constants/urls"
 
 
 // NEW TYPE
@@ -183,7 +184,7 @@ export function CourseBuilder({ courseData }: { courseData: Prop }) {
 
   // Share functionality
   const handleShare = async () => {
-    const shareUrl = `${process.env.BETTER_AUTH_URL!}/dashboard/share/${courseData.id}`
+    const shareUrl = `${BASE_URL}/dashboard/share/${courseData.id}`
     
     try {
       await navigator.clipboard.writeText(shareUrl)
@@ -664,7 +665,7 @@ export function CourseBuilder({ courseData }: { courseData: Prop }) {
                                 }}
                                 disabled={isUpdating}
                               >
-                                {isUpdating ? 'Updating...' : 'Mark Completed'}
+                                {isUpdating ? 'Updating...' : 'Mark Done'}
                               </Button>
                             )}
                           </div>
